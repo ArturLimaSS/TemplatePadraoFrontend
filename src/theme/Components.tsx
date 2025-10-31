@@ -1,0 +1,437 @@
+// project imports
+import './DefaultColors';
+import { Theme } from '@mui/material/styles';
+
+const components: any = (theme: Theme) => {
+  return {
+    MuiCssBaseline: {
+      styleOverrides: {
+        '*': {
+          boxSizing: 'border-box',
+        },
+        html: {
+          height: '100%',
+          width: '100%',
+        },
+        a: {
+          textDecoration: 'none',
+        },
+        body: {
+          height: '100%',
+          margin: 0,
+          padding: 0,
+        },
+        '.ql-container.ql-snow, .ql-toolbar.ql-snow': {
+          border: '0 !important',
+          borderRadius: '7px',
+        },
+        '.ql-editor, .ql-snow *': {
+          fontFamiy: 'inherit !important',
+        },
+        '#root': {
+          height: '100%',
+        },
+        "*[dir='rtl'] .buyNowImg": {
+          transform: 'scaleX(-1)',
+        },
+        '.border-none': {
+          border: '0px',
+          td: {
+            border: '0px',
+          },
+        },
+        pre: {
+          background: `${theme.palette.grey[100]} !important`,
+        },
+        '.btn-xs': {
+          minWidth: '30px !important',
+          width: '30px',
+          height: '30px',
+          borderRadius: '6px !important',
+          padding: '0px !important',
+        },
+        '.hover-text-primary:hover .text-hover': {
+          color: theme.palette.primary.main,
+        },
+        '.hoverCard:hover': {
+          scale: '1.01',
+          transition: ' 0.1s ease-in',
+        },
+        '.signup-bg': {
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          height: '100%',
+        },
+        '.MuiBox-root': {
+          borderRadius: theme.shape.borderRadius,
+        },
+        '.MuiCardHeader-action': {
+          alignSelf: 'center !important',
+        },
+        '.emoji-picker-react .emoji-scroll-wrapper': {
+          overflowX: 'hidden',
+        },
+        '.scrollbar-container': {
+          borderRight: '0 !important',
+        },
+        '.theme-timeline .MuiTimelineOppositeContent-root': {
+          minWidth: '90px',
+        },
+        '.MuiAlert-root .MuiAlert-icon': {
+          color: 'inherit!important',
+        },
+        '.MuiTimelineConnector-root': {
+          width: '1px !important',
+        },
+        ' .simplebar-scrollbar:before': {
+          background: `${theme.palette.grey[300]} !important`,
+        },
+        '@keyframes gradient': {
+          '0%': {
+            backgroundPosition: '0% 50%',
+          },
+          '50%': {
+            backgroundPosition: ' 100% 50%',
+          },
+          '100% ': {
+            backgroundPosition: ' 0% 50%',
+          },
+        },
+        '@keyframes slide': {
+          '0%': {
+            transform: 'translate3d(0, 0, 0)',
+          },
+          '100% ': {
+            transform: 'translate3d(-2086px, 0, 0)',
+          },
+        },
+        '@keyframes marquee': {
+          '0%': {
+            transform: 'translateZ(0)',
+          },
+          '100%': {
+            transform: 'translate3d(-2086px,0,0)',
+          },
+        },
+        '@keyframes marquee2': {
+          '0%': {
+            transform: 'translate3d(-2086px,0,0)',
+          },
+          '100%': {
+            transform: 'translateZ(0)',
+          },
+        },
+        '@keyframes marqueeRtl': {
+          '0%': {
+            transform: 'translateZ(0)',
+          },
+          '100%': {
+            transform: 'translate3d(2086px,0,0)',
+          },
+        },
+        '@keyframes marquee2Rtl': {
+          '0%': {
+            transform: 'translate3d(2086px,0,0)',
+          },
+          '100%': {
+            transform: 'translateZ(0)',
+          },
+        },
+      },
+    },
+
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          ':before': {
+            backgroundColor: theme.palette.grey[100],
+          },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          // border: `1px solid ${theme.palette.divider}`,
+          backgroundImage: 'none',
+        },
+      },
+    },
+    MuiStepConnector: {
+      styleOverrides: {
+        line: {
+          borderColor: theme.palette.divider,
+        },
+      },
+    },
+    MuiFab: {
+      styleOverrides: {
+        sizeSmall: {
+          width: 30,
+          height: 30,
+          minHeight: 30,
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          '&:hover': {
+            backgroundColor: theme.palette.primary.light,
+            color: theme.palette.primary.main,
+          },
+        },
+        colorPrimary: {
+          '&:hover': {
+            backgroundColor: theme.palette.primary.main,
+            color: 'white',
+          },
+        },
+        colorSecondary: {
+          '&:hover': {
+            backgroundColor: theme.palette.secondary.main,
+            color: 'white',
+          },
+        },
+        colorSuccess: {
+          '&:hover': {
+            backgroundColor: theme.palette.success.main,
+            color: 'white',
+          },
+        },
+        colorError: {
+          '&:hover': {
+            backgroundColor: theme.palette.error.main,
+            color: 'white',
+          },
+        },
+        colorWarning: {
+          '&:hover': {
+            backgroundColor: theme.palette.warning.main,
+            color: 'white',
+          },
+        },
+        colorInfo: {
+          '&:hover': {
+            backgroundColor: theme.palette.info.main,
+            color: 'white',
+          },
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+        },
+        text: {
+          padding: '5px 15px',
+          '&:hover': {
+            backgroundColor: theme.palette.primary.light,
+            color: theme.palette.primary.main,
+          },
+        },
+        textPrimary: {
+          backgroundColor: theme.palette.primary.light,
+          '&:hover': {
+            backgroundColor: theme.palette.primary.main,
+            color: 'white',
+          },
+        },
+        textSecondary: {
+          backgroundColor: theme.palette.secondary.light,
+          '&:hover': {
+            backgroundColor: theme.palette.secondary.main,
+            color: 'white',
+          },
+        },
+        textSuccess: {
+          backgroundColor: theme.palette.success.light,
+          '&:hover': {
+            backgroundColor: theme.palette.success.main,
+            color: 'white',
+          },
+        },
+        textError: {
+          backgroundColor: theme.palette.error.light,
+          '&:hover': {
+            backgroundColor: theme.palette.error.main,
+            color: 'white',
+          },
+        },
+        textInfo: {
+          backgroundColor: theme.palette.info.light,
+          '&:hover': {
+            backgroundColor: theme.palette.info.main,
+            color: 'white',
+          },
+        },
+        textWarning: {
+          backgroundColor: theme.palette.warning.light,
+          '&:hover': {
+            backgroundColor: theme.palette.warning.main,
+            color: 'white',
+          },
+        },
+        outlinedPrimary: {
+          '&:hover': {
+            backgroundColor: theme.palette.primary.main,
+            color: 'white',
+          },
+        },
+        outlinedSecondary: {
+          '&:hover': {
+            backgroundColor: theme.palette.secondary.main,
+            color: 'white',
+          },
+        },
+        outlinedError: {
+          '&:hover': {
+            backgroundColor: theme.palette.error.main,
+            color: 'white',
+          },
+        },
+        outlinedSuccess: {
+          '&:hover': {
+            backgroundColor: theme.palette.success.main,
+            color: 'white',
+          },
+        },
+        outlinedInfo: {
+          '&:hover': {
+            backgroundColor: theme.palette.info.main,
+            color: 'white',
+          },
+        },
+        outlinedWarning: {
+          '&:hover': {
+            backgroundColor: theme.palette.warning.main,
+            color: 'white',
+          },
+        },
+      },
+    },
+    
+   
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          borderBottom: `1px solid ${theme.palette.divider}`,
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          '&:last-child td': {
+            borderBottom: 0,
+          },
+        },
+      },
+    },
+    MuiGridItem: {
+      styleOverrides: {
+        root: {
+          paddingTop: '30px',
+          paddingLeft: '30px !important',
+        },
+      },
+    },
+
+    MuiTimelineConnector: {
+      styleOverrides: {
+        root: {
+          backgroundColor: theme.palette.divider,
+        },
+      },
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          borderColor: theme.palette.divider,
+        },
+      },
+    },
+
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          fontWeight: 600,
+          fontSize: '0.75rem',
+        },
+      },
+    },
+    MuiAlert: {
+      styleOverrides: {
+        filledSuccess: {
+          color: 'white',
+        },
+        filledInfo: {
+          color: 'white',
+        },
+        filledError: {
+          color: 'white',
+        },
+        filledWarning: {
+          color: 'white',
+        },
+        standardSuccess: {
+          backgroundColor: theme.palette.success.light,
+          color: theme.palette.success.main,
+        },
+        standardError: {
+          backgroundColor: theme.palette.error.light,
+          color: theme.palette.error.main,
+        },
+        standardWarning: {
+          backgroundColor: theme.palette.warning.light,
+          color: theme.palette.warning.main,
+        },
+        standardInfo: {
+          backgroundColor: theme.palette.info.light,
+          color: theme.palette.info.main,
+        },
+        outlinedSuccess: {
+          borderColor: theme.palette.success.main,
+          color: theme.palette.success.main,
+        },
+        outlinedWarning: {
+          borderColor: theme.palette.warning.main,
+          color: theme.palette.warning.main,
+        },
+        outlinedError: {
+          borderColor: theme.palette.error.main,
+          color: theme.palette.error.main,
+        },
+        outlinedInfo: {
+          borderColor: theme.palette.info.main,
+          color: theme.palette.info.main,
+        },
+        successIcon: {
+          color: theme.palette.info.main,
+        },
+      },
+    },
+
+  
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          color: theme.palette.background.paper,
+          background: theme.palette.text.primary,
+        },
+      },
+    },
+ 
+
+    MuiPopover: {
+      styleOverrides: {
+        paper: {
+          boxShadow: theme.shadows[9],
+        },
+      },
+    },
+  };
+};
+export default components;
