@@ -50,12 +50,12 @@ const featuresData: FeaturesType[] = [
   {
     icon: <IconAdjustments width={40} height={40} strokeWidth={1.5} />,
     title: '45+ UI Components',
-    subtext: 'Almost 45+ UI Components being given with Modernize Admin Pack.',
+    subtext: 'Almost 45+ UI Components being given with OrCloud Admin Pack.',
   },
   {
     icon: <IconPresentation width={40} height={40} strokeWidth={1.5} />,
     title: '4+ Frontend Pages',
-    subtext: 'We have added useful frontend pages with Modernize Admin',
+    subtext: 'We have added useful frontend pages with OrCloud Admin',
   },
   {
     icon: <IconTag width={40} height={40} strokeWidth={1.5} />,
@@ -126,7 +126,7 @@ const featuresData: FeaturesType[] = [
 
 const Features = () => {
   return (
-    (<Box py={6}>
+    <Box py={6}>
       <Container maxWidth="lg">
         <FeaturesTitle />
         <AnimationFadeIn>
@@ -139,8 +139,9 @@ const Features = () => {
                   size={{
                     xs: 12,
                     sm: 4,
-                    lg: 3
-                  }}>
+                    lg: 3,
+                  }}
+                >
                   <Box color="primary.main">{feature.icon}</Box>
                   <Typography variant="h5" mt={3}>
                     {feature.title}
@@ -154,7 +155,7 @@ const Features = () => {
           </Box>
         </AnimationFadeIn>
       </Container>
-    </Box>)
+    </Box>
   );
 };
 

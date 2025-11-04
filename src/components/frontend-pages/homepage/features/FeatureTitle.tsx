@@ -2,15 +2,16 @@ import { Box, Grid, Typography } from '@mui/material';
 
 const FeatureTitle = () => {
   return (
-    (<Grid container spacing={3} justifyContent="center">
+    <Grid container spacing={3} justifyContent="center">
       <Grid
         textAlign="center"
         size={{
           xs: 12,
-          lg: 6
-        }}>
+          lg: 6,
+        }}
+      >
         <Typography variant="body1">
-          Introducing Modernize's Light & Dark Skins,{' '}
+          Introducing OrCloud's Light & Dark Skins,{' '}
           <Box fontWeight={500} component="span">
             Exceptional Dashboards
           </Box>
@@ -18,7 +19,7 @@ const FeatureTitle = () => {
           Dynamic Pages - Stay Updated on What's New!
         </Typography>
       </Grid>
-    </Grid>)
+    </Grid>
   );
 };
 

@@ -6,10 +6,10 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import Spinner from './views/spinner/Spinner';
 import './utils/i18n';
-
+import { LoadingProvider } from './context/LoadingContext/LoadingContext';
 
 async function deferRender() {
-  const { worker } = await import("./api/mocks/browser");
+  const { worker } = await import('./api/mocks/browser');
   return worker.start({
     onUnhandledRequest: 'bypass',
   });
@@ -19,8 +19,10 @@ deferRender().then(() => {
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <CustomizerContextProvider>
       <Suspense fallback={<Spinner />}>
-        <App />
+        <LoadingProvider>
+          <App />
+        </LoadingProvider>
       </Suspense>
     </CustomizerContextProvider>,
-  )
-})
+  );
+});

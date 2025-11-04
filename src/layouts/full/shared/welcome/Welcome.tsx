@@ -39,7 +39,7 @@ const Welcome = () => {
           variant="filled"
           sx={{ width: '100%', color: 'white' }}
         >
-          <AlertTitle>Welcome To Modernize</AlertTitle>
+          <AlertTitle>Bem vindo ao OrCloud</AlertTitle>
           Easy to customize the Template!!!
         </Alert>
       </Snackbar>

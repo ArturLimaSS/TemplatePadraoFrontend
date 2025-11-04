@@ -16,7 +16,8 @@ import {
   IconButton,
   ListItemIcon,
   AvatarGroup,
-  Box, Stack
+  Box,
+  Stack,
 } from '@mui/material';
 import BlankCard from '../shared/BlankCard';
 import img1 from 'src/assets/images/profile/user-1.jpg';
@@ -36,7 +37,7 @@ interface rowsType {
   users: Array<{ img: string }>;
 }
 
-const rows:rowsType[] = [
+const rows: rowsType[] = [
   {
     status: 'active',
     avatar: img1,
@@ -81,7 +82,7 @@ const rows:rowsType[] = [
     status: 'pending',
     avatar: img6,
     name: 'Isabel Vasquez',
-    project: 'Modernize admin',
+    project: 'OrCloud admin',
     percent: 32,
     users: [{ img: img2 }, { img: img4 }],
   },
@@ -98,7 +99,7 @@ const Table2 = () => {
   };
 
   return (
-    (<BlankCard>
+    <BlankCard>
       <TableContainer>
         <Table aria-label="simple table">
           <TableHead>
@@ -154,14 +155,14 @@ const Table2 = () => {
                         row.status == 'active'
                           ? (theme) => theme.palette.primary.light
                           : row.status == 'cancel'
-                            ? (theme) => theme.palette.error.light
-                            : (theme) => theme.palette.success.light,
+                          ? (theme) => theme.palette.error.light
+                          : (theme) => theme.palette.success.light,
                       color:
                         row.status == 'active'
                           ? (theme) => theme.palette.primary.main
                           : row.status == 'cancel'
-                            ? (theme) => theme.palette.error.main
-                            : (theme) => theme.palette.success.main,
+                          ? (theme) => theme.palette.error.main
+                          : (theme) => theme.palette.success.main,
                     }}
                   />
                 </TableCell>
@@ -184,7 +185,7 @@ const Table2 = () => {
                     slotProps={{
                       list: {
                         'aria-labelledby': 'basic-button',
-                      }
+                      },
                     }}
                   >
                     <MenuItem onClick={handleClose}>
@@ -212,7 +213,7 @@ const Table2 = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </BlankCard>)
+    </BlankCard>
   );
 };
 

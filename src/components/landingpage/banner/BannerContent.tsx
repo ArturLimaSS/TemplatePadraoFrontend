@@ -4,7 +4,6 @@ import React from 'react';
 import { Typography, Box, Button, Stack, styled, useMediaQuery, Theme } from '@mui/material';
 import { IconRocket } from '@tabler/icons-react';
 
-
 // third party
 
 import { motion } from 'framer-motion';
@@ -15,9 +14,8 @@ const StyledButton = styled(Button)(() => ({
 }));
 
 const BannerContent = () => {
-
   const lgDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'));
-  
+
   return (
     <Box mt={lgDown ? 8 : 0}>
       <motion.div
@@ -67,8 +65,8 @@ const BannerContent = () => {
           }}
         >
           <Typography variant="h5" fontWeight={300}>
-            Modernize comes with light & dark color skins, well designed dashboards, applications
-            and pages.
+            OrCloud comes with light & dark color skins, well designed dashboards, applications and
+            pages.
           </Typography>
         </motion.div>
       </Box>

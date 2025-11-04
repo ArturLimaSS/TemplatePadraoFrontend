@@ -7,9 +7,13 @@ export interface registerType {
 export interface loginType {
   title?: string;
   subtitle?: any | any[];
-  subtext?: any | any[];
 }
 
 export interface signInType {
   title?: string;
+}
+
+export interface loginFormType {
+  email: string;
+  password: string;
 }

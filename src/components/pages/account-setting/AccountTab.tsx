@@ -72,19 +72,22 @@ const AccountTab = () => {
   };
 
   return (
-    (<Grid container spacing={3}>
+    <Grid container spacing={3}>
       {/* Change Profile */}
       <Grid
         size={{
           xs: 12,
-          lg: 6
-        }}>
+          lg: 6,
+        }}
+      >
         <BlankCard>
           <CardContent>
             <Typography variant="h5" mb={1}>
               Change Profile
             </Typography>
-            <Typography color="textSecondary" mb={3}>Change your profile picture from here</Typography>
+            <Typography color="textSecondary" mb={3}>
+              Change your profile picture from here
+            </Typography>
             <Box textAlign="center" display="flex" justifyContent="center">
               <Box>
                 <Avatar
@@ -113,14 +116,17 @@ const AccountTab = () => {
       <Grid
         size={{
           xs: 12,
-          lg: 6
-        }}>
+          lg: 6,
+        }}
+      >
         <BlankCard>
           <CardContent>
             <Typography variant="h5" mb={1}>
               Change Password
             </Typography>
-            <Typography color="textSecondary" mb={3}>To change your password please confirm here</Typography>
+            <Typography color="textSecondary" mb={3}>
+              To change your password please confirm here
+            </Typography>
             <form>
               <CustomFormLabel
                 sx={{
@@ -166,14 +172,17 @@ const AccountTab = () => {
             <Typography variant="h5" mb={1}>
               Personal Details
             </Typography>
-            <Typography color="textSecondary" mb={3}>To change your personal detail , edit and save from here</Typography>
+            <Typography color="textSecondary" mb={3}>
+              To change your personal detail , edit and save from here
+            </Typography>
             <form>
               <Grid container spacing={3}>
                 <Grid
                   size={{
                     xs: 12,
-                    sm: 6
-                  }}>
+                    sm: 6,
+                  }}
+                >
                   <CustomFormLabel
                     sx={{
                       mt: 0,
@@ -192,8 +201,9 @@ const AccountTab = () => {
                 <Grid
                   size={{
                     xs: 12,
-                    sm: 6
-                  }}>
+                    sm: 6,
+                  }}
+                >
                   {/* 2 */}
                   <CustomFormLabel
                     sx={{
@@ -213,8 +223,9 @@ const AccountTab = () => {
                 <Grid
                   size={{
                     xs: 12,
-                    sm: 6
-                  }}>
+                    sm: 6,
+                  }}
+                >
                   {/* 3 */}
                   <CustomFormLabel
                     sx={{
@@ -241,8 +252,9 @@ const AccountTab = () => {
                 <Grid
                   size={{
                     xs: 12,
-                    sm: 6
-                  }}>
+                    sm: 6,
+                  }}
+                >
                   {/* 4 */}
                   <CustomFormLabel
                     sx={{
@@ -269,8 +281,9 @@ const AccountTab = () => {
                 <Grid
                   size={{
                     xs: 12,
-                    sm: 6
-                  }}>
+                    sm: 6,
+                  }}
+                >
                   {/* 5 */}
                   <CustomFormLabel
                     sx={{
@@ -282,7 +295,7 @@ const AccountTab = () => {
                   </CustomFormLabel>
                   <CustomTextField
                     id="text-email"
-                    value="info@modernize.com"
+                    value="info@OrCloud.com"
                     variant="outlined"
                     fullWidth
                   />
@@ -290,8 +303,9 @@ const AccountTab = () => {
                 <Grid
                   size={{
                     xs: 12,
-                    sm: 6
-                  }}>
+                    sm: 6,
+                  }}
+                >
                   {/* 6 */}
                   <CustomFormLabel
                     sx={{
@@ -338,7 +352,7 @@ const AccountTab = () => {
           </Button>
         </Stack>
       </Grid>
-    </Grid>)
+    </Grid>
   );
 };
 

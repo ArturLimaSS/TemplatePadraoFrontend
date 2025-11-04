@@ -6,18 +6,19 @@ import logoIcon from 'src/assets/images/logos/logoIcon.svg';
 
 const Footer = () => {
   return (
-    (<Container maxWidth="lg">
+    <Container maxWidth="lg">
       <Grid container spacing={3} justifyContent="center" mt={4}>
         <Grid
           textAlign="center"
           size={{
             xs: 12,
             sm: 5,
-            lg: 4
-          }}>
+            lg: 4,
+          }}
+        >
           <img src={logoIcon} alt="icon" />
           <Typography fontSize="16" color="textSecondary" mt={1} mb={4}>
-            All rights reserved by Modernize. Designed & Developed by
+            All rights reserved by OrCloud. Designed & Developed by
             <Link target="_blank" href="https://adminmart.com/">
               <Typography color="textSecondary" component="span" display="inline">
                 {' '}
@@ -28,7 +29,7 @@ const Footer = () => {
           </Typography>
         </Grid>
       </Grid>
-    </Container>)
+    </Container>
   );
 };
 

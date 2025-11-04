@@ -4,7 +4,7 @@ const keys = [
   {
     text: 'Founded',
     title: '2019',
-    subtext: 'When we founded Modernize',
+    subtext: 'When we founded OrCloud',
   },
   {
     text: 'Growth',
@@ -15,19 +15,19 @@ const keys = [
     text: 'Customers',
     title: '300k+',
     isMargin: true,
-    subtext: 'Customers on Modernize',
+    subtext: 'Customers on OrCloud',
   },
   {
     text: 'Dashboards',
     title: '25k+',
     isMargin: true,
-    subtext: 'Dashboards built using Modernize',
+    subtext: 'Dashboards built using OrCloud',
   },
 ];
 
 const Key = () => {
   return (
-    (<Grid container spacing={2}>
+    <Grid container spacing={2}>
       {keys.map((key, i) => (
         <Grid
           key={i}
@@ -38,8 +38,9 @@ const Key = () => {
           }}
           size={{
             xs: 6,
-            sm: 6
-          }}>
+            sm: 6,
+          }}
+        >
           <Typography color="primary.main" textTransform="uppercase" fontSize="13px">
             {key.text}
           </Typography>
@@ -60,7 +61,7 @@ const Key = () => {
           <Typography variant="body1">{key.subtext}</Typography>
         </Grid>
       ))}
-    </Grid>)
+    </Grid>
   );
 };
 

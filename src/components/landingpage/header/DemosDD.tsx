@@ -9,7 +9,7 @@ import darkDemo from 'src/assets/images/landingpage/demos/demo-dark.jpg';
 import horizontalDemo from 'src/assets/images/landingpage/demos/demo-horizontal.jpg';
 import nextauthDemo from 'src/assets/images/landingpage/demos/demo-firebase.jpg';
 import rtlDemo from 'src/assets/images/landingpage/demos/demo-rtl.jpg';
-import minisidebarDemo from 'src/assets/images/landingpage/demos/demo-minisidebar.jpg'
+import minisidebarDemo from 'src/assets/images/landingpage/demos/demo-minisidebar.jpg';
 
 import app1 from 'src/assets/images/landingpage/apps/app-calendar.jpg';
 import app2 from 'src/assets/images/landingpage/apps/app-chat.jpg';
@@ -25,37 +25,36 @@ interface DemoTypes {
 
 const demos: DemoTypes[] = [
   {
-    link: 'https://modernize-react-main.netlify.app/dashboards/modern',
+    link: 'https://OrCloud-react-main.netlify.app/dashboards/modern',
     img: mainDemo,
     title: 'Main',
   },
   {
-    link: 'https://modernize-react-dark.netlify.app/dashboards/ecommerce',
+    link: 'https://OrCloud-react-dark.netlify.app/dashboards/ecommerce',
     img: darkDemo,
     title: 'Dark',
   },
   {
-    link: 'https://modernize-react-horizontal.netlify.app/dashboards/modern',
+    link: 'https://OrCloud-react-horizontal.netlify.app/dashboards/modern',
     img: horizontalDemo,
     title: 'Horizontal',
   },
   {
-    link: 'https://modernize-react-firebase.netlify.app/auth/login',
+    link: 'https://OrCloud-react-firebase.netlify.app/auth/login',
     img: nextauthDemo,
     title: 'Firebase',
   },
   {
-    link: 'https://modernize-react-rtl.netlify.app/dashboards/modern',
+    link: 'https://OrCloud-react-rtl.netlify.app/dashboards/modern',
     img: rtlDemo,
     title: 'RTL',
   },
 
   {
-    link: 'https://modernize-react-minisidebar.netlify.app/dashboards/modern',
+    link: 'https://OrCloud-react-minisidebar.netlify.app/dashboards/modern',
     img: minisidebarDemo,
     title: 'Minisidebar',
   },
-
 ];
 
 const apps: DemoTypes[] = [

@@ -49,7 +49,7 @@ const DozensCarousel = () => {
           borderRadius="16px"
           sx={{ boxShadow: (theme) => theme.shadows[10], padding: '0 30px 16px' }}
         >
-          <NavLink to="https://modernize-react.adminmart.com/dashboards/modern">
+          <NavLink to="https://OrCloud-react.adminmart.com/dashboards/modern">
             <img
               src={Demo1}
               alt="user-img"
@@ -67,7 +67,7 @@ const DozensCarousel = () => {
           borderRadius="16px"
           sx={{ boxShadow: (theme) => theme.shadows[10], padding: '0 30px 16px' }}
         >
-          <NavLink to="https://modernize-react-dark.netlify.app/dashboards/ecommerce">
+          <NavLink to="https://OrCloud-react-dark.netlify.app/dashboards/ecommerce">
             <img
               src={Demo2}
               alt="user-img"
@@ -85,7 +85,7 @@ const DozensCarousel = () => {
           borderRadius="16px"
           sx={{ boxShadow: (theme) => theme.shadows[10], padding: '0 30px 16px' }}
         >
-          <NavLink to="https://modernize-react-rtl.netlify.app/dashboards/modern">
+          <NavLink to="https://OrCloud-react-rtl.netlify.app/dashboards/modern">
             <img
               src={Demo3}
               alt="user-img"
@@ -103,7 +103,7 @@ const DozensCarousel = () => {
           borderRadius="16px"
           sx={{ boxShadow: (theme) => theme.shadows[10], padding: '0 30px 16px' }}
         >
-          <NavLink to="https://modernize-react-horizontal.netlify.app/dashboards/modern">
+          <NavLink to="https://OrCloud-react-horizontal.netlify.app/dashboards/modern">
             <img
               src={Demo4}
               alt="user-img"
@@ -121,7 +121,7 @@ const DozensCarousel = () => {
           borderRadius="16px"
           sx={{ boxShadow: (theme) => theme.shadows[10], padding: '0 30px 16px' }}
         >
-          <NavLink to="https://modernize-react.adminmart.com/apps/chats">
+          <NavLink to="https://OrCloud-react.adminmart.com/apps/chats">
             <img
               src={App1}
               alt="user-img"
@@ -139,7 +139,7 @@ const DozensCarousel = () => {
           borderRadius="16px"
           sx={{ boxShadow: (theme) => theme.shadows[10], padding: '0 30px 16px' }}
         >
-          <NavLink to="https://modernize-react.adminmart.com/apps/email">
+          <NavLink to="https://OrCloud-react.adminmart.com/apps/email">
             <img
               src={App2}
               alt="user-img"

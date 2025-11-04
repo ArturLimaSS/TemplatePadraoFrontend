@@ -2,16 +2,7 @@
 // @ts-ignore
 import React, { useState } from 'react';
 import { Link } from 'react-router';
-import {
-  Box,
-  Menu,
-  Avatar,
-  Typography,
-  Divider,
-  Button,
-  IconButton,
-  Stack
-} from '@mui/material';
+import { Box, Menu, Avatar, Typography, Divider, Button, IconButton, Stack } from '@mui/material';
 import * as dropdownData from './data';
 
 import { IconMail } from '@tabler/icons-react';
@@ -88,7 +79,7 @@ const Profile = () => {
               gap={1}
             >
               <IconMail width={15} height={15} />
-              info@modernize.com
+              info@OrCloud.com
             </Typography>
           </Box>
         </Stack>
