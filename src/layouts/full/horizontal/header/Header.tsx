@@ -57,7 +57,7 @@ const Header = () => {
 
   return (
     <ProductProvider>
-      <AppBarStyled position="sticky" color="default" variant="outlined">
+      <AppBarStyled position="sticky" color="default">
         <ToolbarStyled
           sx={{
             maxWidth: isLayout === 'boxed' ? 'lg' : '100%!important',
@@ -88,11 +88,11 @@ const Header = () => {
           {/* Toggle Button Sidebar */}
           {/* ------------------------------------------- */}
 
-          {lgUp ? (
+          {/* {lgUp ? (
             <>
               <Navigation />
             </>
-          ) : null}
+          ) : null} */}
           <Box flexGrow={1} />
           <Stack spacing={1} direction="row" alignItems="center">
             <IconButton size="large" color="inherit">
@@ -102,8 +102,7 @@ const Header = () => {
                 <IconSun size="21" stroke="1.5" onClick={() => setActiveMode('light')} />
               )}
             </IconButton>
-            {/* <Notifications /> */}
-
+            <Notifications />
             <Profile />
           </Stack>
         </ToolbarStyled>

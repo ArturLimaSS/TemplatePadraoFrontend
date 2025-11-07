@@ -19,7 +19,7 @@ import { CustomizerContext } from 'src/context/CustomizerContext';
 
 type NavGroup = {
   [x: string]: any;
-  id?: string;
+  id?: string | number;
   navlabel?: boolean;
   subheader?: string;
   title?: string;
@@ -55,6 +55,7 @@ const NavItem = ({ item, level, pathDirect, hideMenu, onClick }: ItemType) => {
     whiteSpace: 'nowrap',
     marginBottom: '2px',
     padding: '8px 10px',
+
     borderRadius: `${isBorderRadius}px`,
     backgroundColor: level > 1 ? 'transparent !important' : 'inherit',
     color:
@@ -108,15 +109,17 @@ const NavItem = ({ item, level, pathDirect, hideMenu, onClick }: ItemType) => {
         >
           {itemIcon}
         </ListItemIcon>
-        <ListItemText>
-          {hideMenu ? '' : <>{t(`${item?.title}`)}</>}
-          <br />
-          {item?.subtitle ? (
-            <Typography variant="caption">{hideMenu ? '' : item?.subtitle}</Typography>
-          ) : (
-            ''
-          )}
-        </ListItemText>
+        {!hideMenu && (
+          <ListItemText>
+            <>{t(`${item?.title}`)}</>
+            <br />
+            {item?.subtitle ? (
+              <Typography variant="caption">{hideMenu ? '' : item?.subtitle}</Typography>
+            ) : (
+              ''
+            )}
+          </ListItemText>
+        )}
 
         {!item?.chip || hideMenu ? null : (
           <Chip

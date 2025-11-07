@@ -40,6 +40,7 @@ const Sidebar = () => {
         <Drawer
           anchor="left"
           open
+          elevation={2}
           onMouseEnter={onHoverEnter}
           onMouseLeave={onHoverLeave}
           variant="permanent"
@@ -53,13 +54,14 @@ const Sidebar = () => {
                 boxSizing: 'border-box',
                 position: 'fixed',
                 top: config.topbarHeight + 2,
+
                 height: `calc(100% - ${config.topbarHeight}px)`,
               },
             },
           }}
         >
           <Box sx={{ height: '100%' }}>
-            <Scrollbar sx={{ height: 'calc(100% - 190px)' }}>
+            <Scrollbar sx={{ height: 'calc(100% - 190px)', mt: 2 }}>
               <SidebarItems />
             </Scrollbar>
             <Profile />
@@ -75,6 +77,7 @@ const Sidebar = () => {
       open={isMobileSidebar}
       onClose={() => setIsMobileSidebar(false)}
       variant="temporary"
+      elevation={2}
       slotProps={{
         paper: {
           sx: {

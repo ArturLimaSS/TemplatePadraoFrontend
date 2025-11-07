@@ -10,6 +10,7 @@ interface AuthState {
   isAuthLoading: boolean;
   usuario_modulos: UsuarioModuloType[];
   inquilino: InquilinoType;
+  usuario_tipo_id: number;
   login: (payload: loginFormType) => Promise<any | undefined>;
   initializeAuth: () => Promise<void>;
   logout: () => void;
@@ -19,6 +20,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: !!localStorage.getItem('token'),
   isAuthLoading: false,
   usuario_modulos: [],
+  usuario_tipo_id: 0,
   inquilino: {
     "id": "",
     "nome": "",
@@ -65,7 +67,8 @@ export const useAuthStore = create<AuthState>((set) => ({
       // const user = JSON.parse(localStorage.getItem('user') || 'null');
       set({
         isAuthenticated: true, isAuthLoading: false, usuario_modulos: response.data.usuario_modulos,
-        inquilino: response.data.inquilino
+        inquilino: response.data.inquilino,
+        usuario_tipo_id: response.data.inquilinoUsuario.usuario_tipo_id,
       });
     } catch (error) {
       // Token inválido ou expirado
