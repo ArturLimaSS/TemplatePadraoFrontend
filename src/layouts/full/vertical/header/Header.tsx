@@ -1,8 +1,8 @@
 import { IconButton, Box, AppBar, useMediaQuery, Toolbar, styled, Stack } from '@mui/material';
 
-import config from 'src/context/config'
-import { useContext } from "react";
-import { ProductProvider } from 'src/context/EcommerceContext/index'
+import config from 'src/context/config';
+import { useContext } from 'react';
+import { ProductProvider } from 'src/context/EcommerceContext/index';
 
 import { IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
 import Notifications from './Notification';
@@ -13,6 +13,7 @@ import Language from './Language';
 import Navigation from './Navigation';
 import MobileRightSidebar from './MobileRightSidebar';
 import { CustomizerContext } from 'src/context/CustomizerContext';
+import Logo from '../../shared/logo/Logo';
 
 const Header = () => {
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up('lg'));
@@ -21,8 +22,14 @@ const Header = () => {
   const TopbarHeight = config.topbarHeight;
 
   // drawer
-  const { activeMode, setActiveMode, setIsCollapse, isCollapse, isMobileSidebar, setIsMobileSidebar } = useContext(CustomizerContext);
-
+  const {
+    activeMode,
+    setActiveMode,
+    setIsCollapse,
+    isCollapse,
+    isMobileSidebar,
+    setIsMobileSidebar,
+  } = useContext(CustomizerContext);
 
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
     boxShadow: 'none',
@@ -40,12 +47,14 @@ const Header = () => {
 
   return (
     <ProductProvider>
-
       <AppBarStyled position="sticky" color="default">
         <ToolbarStyled>
           {/* ------------------------------------------- */}
           {/* Toggle Button Sidebar */}
           {/* ------------------------------------------- */}
+          <Box sx={{ width: '180px', overflow: 'hidden' }}>
+            <Logo />
+          </Box>
           <IconButton
             color="inherit"
             aria-label="menu"
@@ -53,7 +62,9 @@ const Header = () => {
               // Toggle sidebar on both mobile and desktop based on screen size
               if (lgUp) {
                 // For large screens, toggle between full-sidebar and mini-sidebar
-                isCollapse === "full-sidebar" ? setIsCollapse("mini-sidebar") : setIsCollapse("full-sidebar");
+                isCollapse === 'full-sidebar'
+                  ? setIsCollapse('mini-sidebar')
+                  : setIsCollapse('full-sidebar');
               } else {
                 // For smaller screens, toggle mobile sidebar
                 setIsMobileSidebar(!isMobileSidebar);
@@ -66,36 +77,27 @@ const Header = () => {
           {/* ------------------------------------------- */}
           {/* Search Dropdown */}
           {/* ------------------------------------------- */}
-          <Search />
-          {lgUp ? (
+          {/* <Search /> */}
+          {/* {lgUp ? (
             <>
               <Navigation />
             </>
-          ) : null}
+          ) : null} */}
 
           <Box flexGrow={1} />
           <Stack spacing={1} direction="row" alignItems="center">
-            <Language />
-            {/* ------------------------------------------- */}
-            {/* Ecommerce Dropdown */}
-            {/* ------------------------------------------- */}
-            <Cart />
-            {/* ------------------------------------------- */}
-            {/* End Ecommerce Dropdown */}
-            {/* ------------------------------------------- */}
             <IconButton size="large" color="inherit">
               {activeMode === 'light' ? (
-                <IconMoon size="21" stroke="1.5" onClick={() => setActiveMode("dark")}
-                />
+                <IconMoon size="21" stroke="1.5" onClick={() => setActiveMode('dark')} />
               ) : (
-                <IconSun size="21" stroke="1.5" onClick={() => setActiveMode("light")} />
+                <IconSun size="21" stroke="1.5" onClick={() => setActiveMode('light')} />
               )}
             </IconButton>
-            <Notifications />
+            {/* <Notifications /> */}
             {/* ------------------------------------------- */}
             {/* Toggle Right Sidebar for mobile */}
             {/* ------------------------------------------- */}
-            {lgDown ? <MobileRightSidebar /> : null}
+            {/* {lgDown ? <MobileRightSidebar /> : null} */}
             <Profile />
           </Stack>
         </ToolbarStyled>

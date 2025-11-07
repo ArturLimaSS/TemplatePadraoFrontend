@@ -29,8 +29,15 @@ const Header = () => {
   const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
 
   // drawer
-  const { isLayout, setIsMobileSidebar, isMobileSidebar, activeMode, setActiveMode } =
-    React.useContext(CustomizerContext);
+  const {
+    isLayout,
+    setIsMobileSidebar,
+    isCollapse,
+    setIsCollapse,
+    isMobileSidebar,
+    activeMode,
+    setActiveMode,
+  } = React.useContext(CustomizerContext);
   const TopbarHeight = config.topbarHeight;
 
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
@@ -56,27 +63,31 @@ const Header = () => {
             maxWidth: isLayout === 'boxed' ? 'lg' : '100%!important',
           }}
         >
-          <Box sx={{ width: lgDown ? '45px' : 'auto', overflow: 'hidden' }}>
+          <Box sx={{ width: '180px', overflow: 'hidden' }}>
             <Logo />
           </Box>
+          <IconButton
+            color="inherit"
+            aria-label="menu"
+            onClick={() => {
+              // Toggle sidebar on both mobile and desktop based on screen size
+              if (lgUp) {
+                // For large screens, toggle between full-sidebar and mini-sidebar
+                isCollapse === 'full-sidebar'
+                  ? setIsCollapse('mini-sidebar')
+                  : setIsCollapse('full-sidebar');
+              } else {
+                // For smaller screens, toggle mobile sidebar
+                setIsMobileSidebar(!isMobileSidebar);
+              }
+            }}
+          >
+            <IconMenu2 size="20" />
+          </IconButton>
           {/* ------------------------------------------- */}
           {/* Toggle Button Sidebar */}
           {/* ------------------------------------------- */}
-          {lgDown ? (
-            <IconButton
-              color="inherit"
-              aria-label="menu"
-              onClick={() => setIsMobileSidebar(!isMobileSidebar)}
-            >
-              <IconMenu2 />
-            </IconButton>
-          ) : (
-            ''
-          )}
-          {/* ------------------------------------------- */}
-          {/* Search Dropdown */}
-          {/* ------------------------------------------- */}
-          <Search />
+
           {lgUp ? (
             <>
               <Navigation />
@@ -84,15 +95,6 @@ const Header = () => {
           ) : null}
           <Box flexGrow={1} />
           <Stack spacing={1} direction="row" alignItems="center">
-            <Language />
-            {/* ------------------------------------------- */}
-            {/* Ecommerce Dropdown */}
-            {/* ------------------------------------------- */}
-            <Cart />
-            {/* ------------------------------------------- */}
-            {/* End Ecommerce Dropdown */}
-            {/* ------------------------------------------- */}
-
             <IconButton size="large" color="inherit">
               {activeMode === 'light' ? (
                 <IconMoon size="21" stroke="1.5" onClick={() => setActiveMode('dark')} />
@@ -100,7 +102,7 @@ const Header = () => {
                 <IconSun size="21" stroke="1.5" onClick={() => setActiveMode('light')} />
               )}
             </IconButton>
-            <Notifications />
+            {/* <Notifications /> */}
 
             <Profile />
           </Stack>

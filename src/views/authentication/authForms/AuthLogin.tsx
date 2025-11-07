@@ -1,15 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import React, { useState } from 'react';
-import {
-  Box,
-  Typography,
-  FormGroup,
-  FormControlLabel,
-  Button,
-  Stack,
-  Divider,
-} from '@mui/material';
+import { Box, Typography, FormGroup, FormControlLabel, Button, Stack } from '@mui/material';
 import { Link } from 'react-router';
 
 import { loginType, type loginFormType } from 'src/types/auth/auth';
@@ -17,13 +9,12 @@ import CustomCheckbox from '../../../components/forms/theme-elements/CustomCheck
 import CustomTextField from '../../../components/forms/theme-elements/CustomTextField';
 import CustomFormLabel from '../../../components/forms/theme-elements/CustomFormLabel';
 
-import AuthSocialButtons from './AuthSocialButtons';
-import { Password } from '@mui/icons-material';
 import { useAuthStore } from 'src/store/Auth/auth-store';
 import { swalErro, swalSucesso } from 'src/utils/swal';
 
 const AuthLogin = ({ title, subtitle }: loginType) => {
-  const { login } = useAuthStore();
+  const { login, initializeAuth } = useAuthStore();
+
   const [authData, setAuthData] = useState<loginFormType>({
     email: '',
     password: '',
@@ -31,8 +22,9 @@ const AuthLogin = ({ title, subtitle }: loginType) => {
 
   const handleSubmit = async () => {
     const response = await login(authData);
-    if (response.status == 200) {
+    if (response?.status == 200) {
       swalSucesso('Login realizado com sucesso!');
+      setTimeout(() => initializeAuth(), 2000);
     } else {
       swalErro('Credenciais inválidas');
     }
@@ -46,22 +38,6 @@ const AuthLogin = ({ title, subtitle }: loginType) => {
       ) : null}
 
       {/* {subtext} */}
-
-      <AuthSocialButtons title="Sign in with" />
-      <Box mt={3}>
-        <Divider>
-          <Typography
-            component="span"
-            color="textSecondary"
-            variant="h6"
-            fontWeight="400"
-            position="relative"
-            px={2}
-          >
-            or sign in with
-          </Typography>
-        </Divider>
-      </Box>
 
       <Stack>
         <Box>
@@ -96,7 +72,7 @@ const AuthLogin = ({ title, subtitle }: loginType) => {
           <FormGroup>
             <FormControlLabel
               control={<CustomCheckbox defaultChecked />}
-              label="Remeber this Device"
+              label="Lembrar este dispositivo por 30 dias"
             />
           </FormGroup>
           <Typography

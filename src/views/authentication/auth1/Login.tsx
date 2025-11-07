@@ -28,8 +28,7 @@ const Login = () => (
         size={{
           xs: 12,
           sm: 12,
-          lg: 7,
-          xl: 8,
+          lg: 6,
         }}
       >
         <Box position="relative">
@@ -65,13 +64,12 @@ const Login = () => (
         size={{
           xs: 12,
           sm: 12,
-          lg: 5,
-          xl: 4,
+          lg: 6,
         }}
       >
         <Box p={4}>
           <AuthLogin
-            title="Bem vindo ao OrCloud"
+            title="Seja bem vindo"
             subtitle={
               <Stack direction="row" spacing={1} mt={3}>
                 <Typography color="textSecondary" variant="h6" fontWeight="500">

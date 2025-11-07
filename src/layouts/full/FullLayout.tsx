@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { FC, useContext } from 'react';
 import { styled, Container, Box, useTheme } from '@mui/material';
 import { Outlet } from 'react-router';
@@ -32,12 +32,12 @@ const FullLayout: FC = () => {
   const { activeLayout, isLayout, activeMode, isCollapse } = useContext(CustomizerContext);
   const theme = useTheme();
   const MiniSidebarWidth = config.miniSidebarWidth;
+  const SidebarWidth = config.sidebarWidth;
 
   return (
     <>
       <LoadingBar />
       <MainWrapper className={activeMode === 'dark' ? 'darkbg mainwrapper' : 'mainwrapper'}>
-
         {/* ------------------------------------------- */}
         {/* Sidebar */}
         {/* ------------------------------------------- */}
@@ -45,25 +45,24 @@ const FullLayout: FC = () => {
         {/* ------------------------------------------- */}
         {/* Main Wrapper */}
         {/* ------------------------------------------- */}
-        <PageWrapper
-          className="page-wrapper"
-          sx={{
-            ...(isCollapse === "mini-sidebar" && {
-              [theme.breakpoints.up('lg')]: { ml: `${MiniSidebarWidth}px` },
-            }),
-          }}
-        >
+        <PageWrapper className="page-wrapper" sx={{}}>
           {/* ------------------------------------------- */}
           {/* Header */}
           {/* ------------------------------------------- */}
-          {activeLayout === 'horizontal' ? <HorizontalHeader /> : <Header />}
-          {/* PageContent */}
-          {activeLayout === 'horizontal' ? <Navigation /> : ''}
+          <HorizontalHeader />
+
           <Container
             sx={{
               pt: '30px',
-              maxWidth: isLayout === 'boxed' ? 'lg' : '100%!important',
+              maxWidth: '100%!important',
+              ...(isCollapse === 'mini-sidebar' && {
+                [theme.breakpoints.up('lg')]: { pl: `${MiniSidebarWidth + 20}px` },
+              }),
+              ...(!(isCollapse === 'mini-sidebar') && {
+                [theme.breakpoints.up('lg')]: { pl: `${SidebarWidth + 20}px` },
+              }),
             }}
+            // sidebarWidth
           >
             {/* ------------------------------------------- */}
             {/* PageContent */}
@@ -79,11 +78,10 @@ const FullLayout: FC = () => {
             {/* End Page */}
             {/* ------------------------------------------- */}
           </Container>
-          <Customizer />
+          {/* <Customizer /> */}
         </PageWrapper>
       </MainWrapper>
     </>
-
   );
 };
 

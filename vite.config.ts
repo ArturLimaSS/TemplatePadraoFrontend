@@ -11,6 +11,7 @@ export default defineConfig({
             src: resolve(__dirname, 'src'),
         },
     },
+
     esbuild: {
         loader: 'tsx',
         include: /src\/.*\.tsx?$/,
@@ -36,7 +37,7 @@ export default defineConfig({
     },
 
 
-    
+
     // plugins: [react(),svgr({
     //   exportAsDefault: true
     // })],

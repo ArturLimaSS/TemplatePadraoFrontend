@@ -17,43 +17,26 @@ import { styled } from '@mui/material';
 import config from 'src/context/config';
 import { CustomizerContext } from 'src/context/CustomizerContext';
 
-
 const Logo: FC = () => {
-  const { isCollapse, isSidebarHover, activeDir, activeMode } = useContext(CustomizerContext);
+  const { activeMode } = useContext(CustomizerContext);
   const TopbarHeight = config.topbarHeight;
 
   const LinkStyled = styled(Link)(() => ({
     height: TopbarHeight,
-    width: isCollapse == "mini-sidebar" && !isSidebarHover ? '40px' : '180px',
+    width: '180px',
     overflow: 'hidden',
     display: 'block',
   }));
 
-  if (activeDir === 'ltr') {
-    return (
-      <LinkStyled to="/" style={{
+  return (
+    <LinkStyled
+      to="/"
+      style={{
         display: 'flex',
         alignItems: 'center',
-      }}>
-        {activeMode === 'dark' ? (
-          <LogoLight />
-        ) : (
-          <LogoDark />
-        )}
-      </LinkStyled>
-    );
-  }
-
-  return (
-    <LinkStyled to="/" style={{
-      display: 'flex',
-      alignItems: 'center',
-    }}>
-      {activeMode === 'dark' ? (
-        <LogoDarkRTL />
-      ) : (
-        <LogoLightRTL />
-      )}
+      }}
+    >
+      {activeMode === 'dark' ? <LogoLight /> : <LogoDark />}
     </LinkStyled>
   );
 };
