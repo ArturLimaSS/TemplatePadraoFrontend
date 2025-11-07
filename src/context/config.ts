@@ -7,11 +7,11 @@ const config = {
   isSidebarHover: false,
   isCollapse: 'full-sidebar',
   isLanguage: 'en',
-  isCardShadow: true,
+  isCardShadow: false,
   isMobileSidebar: false,
   isHorizontal: true,
   isBorderRadius: 16,
-  sidebarWidth: 270,
+  sidebarWidth: 230,
   miniSidebarWidth: 87,
   topbarHeight: 70,
 };

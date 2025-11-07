@@ -14,18 +14,13 @@ import {
 
 import { IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
 import Notifications from 'src/layouts/full/vertical/header/Notification';
-import Cart from 'src/layouts/full/vertical/header/Cart';
 import Profile from 'src/layouts/full/vertical/header/Profile';
-import Search from 'src/layouts/full/vertical/header/Search';
-import Language from 'src/layouts/full/vertical/header/Language';
-import Navigation from 'src/layouts/full/vertical/header/Navigation';
 import Logo from 'src/layouts/full/shared/logo/Logo';
 import { ProductProvider } from 'src/context/EcommerceContext/index';
 import config from 'src/context/config';
 import { CustomizerContext } from 'src/context/CustomizerContext';
 
 const Header = () => {
-  const lgDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'));
   const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
 
   // drawer

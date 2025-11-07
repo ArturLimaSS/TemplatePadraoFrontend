@@ -34,7 +34,7 @@ const FollowerCard = () => {
         <Stack direction="row" alignItems={'center'} mt={2}>
           <Box>
             <Typography variant="h3">
-              Followers &nbsp;
+              Usu &nbsp;
               <Chip label={followers.length} color="secondary" size="small" />
             </Typography>
           </Box>
