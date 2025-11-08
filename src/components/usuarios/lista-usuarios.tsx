@@ -17,14 +17,19 @@ import React, { useContext, useEffect } from 'react';
 import BlankCard from 'src/components/shared/BlankCard';
 import { UserDataContext } from 'src/context/UserDataContext';
 import { IconMapPin, IconSearch } from '@tabler/icons-react';
+import { useUsuarioStore } from 'src/store/Usuario/usuario-store';
 
 const ListaUsuarios = () => {
   const { followers, toggleFollow }: any = useContext(UserDataContext);
+  const { lista_usuario, listarUsuario } = useUsuarioStore();
 
+  useEffect(() => {
+    listarUsuario();
+  }, []);
   return (
     <>
       <Grid container spacing={3} mt={2}>
-        {followers.map((profile: any) => {
+        {lista_usuario.map((profile: any) => {
           return (
             <Grid
               key={profile.id}
@@ -45,30 +50,13 @@ const ListaUsuarios = () => {
                         variant="caption"
                         sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
                       >
-                        <IconMapPin size="14" />
-                        {profile.country}
+                        Administrador
                       </Typography>
                     </Box>
                     <Box ml="auto">
-                      {profile.isFollowed ? (
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          size="small"
-                          onClick={() => toggleFollow(profile.id)}
-                        >
-                          Followed
-                        </Button>
-                      ) : (
-                        <Button
-                          variant="outlined"
-                          color="primary"
-                          size="small"
-                          onClick={() => toggleFollow(profile.id)}
-                        >
-                          Follow
-                        </Button>
-                      )}
+                      <Button variant="text" color="primary" size="small">
+                        Editar
+                      </Button>
                     </Box>
                   </Stack>
                 </CardContent>

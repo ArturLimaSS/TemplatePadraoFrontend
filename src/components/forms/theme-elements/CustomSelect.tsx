@@ -7,7 +7,6 @@ import { Select } from '@mui/material';
 const CustomSelect = styled(
   memo((props: any) => (
     <Select
-      size="small"
       MenuProps={{
         disablePortal: true, // Renderiza dentro do Dialog
       }}

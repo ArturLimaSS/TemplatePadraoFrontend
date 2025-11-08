@@ -3,6 +3,7 @@ import { api } from "src/constants/endpoints";
 import type { loginFormType } from "src/types/auth/auth";
 import { ReturnError } from "src/utils/functions";
 import type { InquilinoType, UsuarioModuloType } from "src/types/inquilino/inquilino-types";
+import type { userType } from "src/types/apps/users";
 
 
 interface AuthState {
@@ -10,6 +11,7 @@ interface AuthState {
   isAuthLoading: boolean;
   usuario_modulos: UsuarioModuloType[];
   inquilino: InquilinoType;
+  usuario_logado?: userType | null,
   usuario_tipo_id: number;
   login: (payload: loginFormType) => Promise<any | undefined>;
   initializeAuth: () => Promise<void>;
@@ -20,6 +22,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: !!localStorage.getItem('token'),
   isAuthLoading: false,
   usuario_modulos: [],
+  usuario_logado: null,
   usuario_tipo_id: 0,
   inquilino: {
     "id": "",
@@ -69,6 +72,7 @@ export const useAuthStore = create<AuthState>((set) => ({
         isAuthenticated: true, isAuthLoading: false, usuario_modulos: response.data.usuario_modulos,
         inquilino: response.data.inquilino,
         usuario_tipo_id: response.data.inquilinoUsuario.usuario_tipo_id,
+        usuario_logado: response.data.user
       });
     } catch (error) {
       // Token inválido ou expirado

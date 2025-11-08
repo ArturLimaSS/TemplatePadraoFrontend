@@ -20,7 +20,7 @@ const moduloIcons: Record<string, React.ReactNode> = {
 };
 
 const Painel = () => {
-  const { inquilino, usuario_modulos } = useAuthStore();
+  const { inquilino, usuario_modulos, usuario_logado } = useAuthStore();
 
   const openModulo = (moduloNome: string) => {
     console.log(`Abrindo módulo: ${moduloNome}`);
@@ -32,7 +32,7 @@ const Painel = () => {
     <PageContainer title="Painel" description="Seleção dos módulos disponíveis">
       <Box>
         <Typography variant="h5" sx={{ mb: 4 }}>
-          Bem-vindo(a), {inquilino?.nome}
+          Bem-vindo(a), {usuario_logado?.name}
         </Typography>
 
         <Grid container spacing={3}>
