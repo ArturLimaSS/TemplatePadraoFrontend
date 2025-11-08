@@ -25,7 +25,7 @@ const initialUsuarioState = {
   name: '',
   email: '',
   password: '',
-  usuario_tipo_id: 2,
+  usuario_tipo_id: "fbf94274-9a4b-4372-90a3-b5ff10612a90",
 };
 
 export const CadastrarUsuario = () => {

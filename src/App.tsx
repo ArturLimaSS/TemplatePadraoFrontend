@@ -7,6 +7,7 @@ import publicRoutes from './routes/PublicRoutes';
 import { CustomizerContext } from 'src/context/CustomizerContext';
 import { useContext, useEffect, useState } from 'react';
 import { useAuthStore } from './store/Auth/auth-store';
+import { AlertProvider } from './context/Alert/useAlert';
 
 const privateRouter = createBrowserRouter(router);
 const publicRouter = createBrowserRouter(publicRoutes);
@@ -38,10 +39,12 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <RTL direction={activeDir}>
-        <CssBaseline />
-        <RouterProvider router={currentRouter} />
-      </RTL>
+      <AlertProvider>
+        <RTL direction={activeDir}>
+          <CssBaseline />
+          <RouterProvider router={currentRouter} />
+        </RTL>
+      </AlertProvider>
     </ThemeProvider>
   );
 }

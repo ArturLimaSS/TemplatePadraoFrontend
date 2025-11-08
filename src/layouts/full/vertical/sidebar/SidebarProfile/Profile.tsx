@@ -6,6 +6,7 @@ import { IconPower } from '@tabler/icons-react';
 import { Link } from 'react-router';
 import { CustomizerContext } from 'src/context/CustomizerContext';
 import { useContext } from 'react';
+import { useAuthStore } from 'src/store/Auth/auth-store';
 
 export const Profile = () => {
   const { isSidebarHover, isCollapse } = useContext(CustomizerContext);
@@ -13,21 +14,22 @@ export const Profile = () => {
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up('lg'));
   const hideMenu = lgUp ? isCollapse == 'mini-sidebar' && !isSidebarHover : '';
 
+  const { usuario_logado } = useAuthStore();
 
   return (
     <Box
       display={'flex'}
       alignItems="center"
       gap={2}
-      sx={{ m: 3, p: 2, bgcolor: `${'secondary.light'}` }}
+      sx={{ m: 1, p: 2, bgcolor: `${'secondary.light'}` }}
     >
       {!hideMenu ? (
         <>
-          <Avatar alt="Remy Sharp" src={img1} />
+          <Avatar alt={usuario_logado?.name} src={usuario_logado?.name} />
 
           <Box>
-            <Typography variant="h6">Mathew </Typography>
-            <Typography variant="caption">Designer</Typography>
+            <Typography variant="h6">{usuario_logado?.name}</Typography>
+            {/* <Typography variant="caption"></Typography> */}
           </Box>
           <Box sx={{ ml: 'auto' }}>
             <Tooltip title="Logout" placement="top">

@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-export function swalSucesso(mensagem="") {
+export function swalSucesso(mensagem = "") {
     Swal.fire({
         title: "Sucesso!",
         text: mensagem,
@@ -8,7 +8,7 @@ export function swalSucesso(mensagem="") {
     })
 }
 
-export function swalErro(mensagem="") {
+export function swalErro(mensagem = "") {
     Swal.fire({
         title: "Ooops...",
         text: mensagem,
@@ -24,7 +24,10 @@ const Toast = Swal.mixin({
     timerProgressBar: true
 })
 
-export function toastSucesso(mensagem="") {
+
+
+
+export function toastSucesso(mensagem = "") {
     Toast.fire({
         icon: 'success',
         title: mensagem,
@@ -35,7 +38,7 @@ export function toastSucesso(mensagem="") {
     })
 }
 
-export function toastErro(mensagem="") {
+export function toastErro(mensagem = "") {
     Toast.fire({
         icon: 'error',
         title: mensagem,
@@ -46,7 +49,7 @@ export function toastErro(mensagem="") {
     })
 }
 
-export function toastInfo(mensagem="") {
+export function toastInfo(mensagem = "") {
     Toast.fire({
         icon: 'info',
         title: mensagem,

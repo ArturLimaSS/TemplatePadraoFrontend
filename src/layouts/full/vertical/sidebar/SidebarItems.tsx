@@ -22,7 +22,7 @@ const SidebarItems = () => {
   const hideMenu: any = lgUp ? isCollapse == 'mini-sidebar' && !isSidebarHover : '';
   const { usuario_tipo_id } = useAuthStore();
   return (
-    <Box sx={{ px: 3 }}>
+    <Box sx={{ px: 1 }}>
       <List
         sx={{ pt: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
         className="sidebarNav"

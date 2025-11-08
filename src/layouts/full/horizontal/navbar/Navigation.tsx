@@ -29,7 +29,7 @@ const Navigation = () => {
   }
 
   return (
-    (<Drawer
+    <Drawer
       anchor="left"
       open={isMobileSidebar}
       onClose={() => setIsMobileSidebar(false)}
@@ -41,7 +41,7 @@ const Navigation = () => {
             border: '0 !important',
             boxShadow: (theme) => theme.shadows[8],
           },
-        }
+        },
       }}
     >
       {/* ------------------------------------------- */}
@@ -54,7 +54,7 @@ const Navigation = () => {
       {/* Sidebar For Mobile */}
       {/* ------------------------------------------- */}
       <SidebarItems />
-    </Drawer>)
+    </Drawer>
   );
 };
 
