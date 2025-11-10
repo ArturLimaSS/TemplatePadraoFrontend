@@ -48,6 +48,7 @@ export const useUsuarioStore = create((set, _) => ({
     }
   },
   excluirUsuario: async (payload: UsuarioType) => {
+    set({ isUsuarioLoading: true })
     try {
       const response = await api.put("/v1/usuario/excluir", payload);
       set({ isUsuarioLoading: false })
