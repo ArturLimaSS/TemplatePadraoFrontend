@@ -6,13 +6,15 @@ import {
   DialogContent,
   DialogTitle,
   FormControl,
+  IconButton,
+  InputAdornment,
   InputLabel,
   MenuItem,
   TextField,
   Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import { IconPlus } from '@tabler/icons-react';
+import { IconEye, IconEyeOff, IconPlus } from '@tabler/icons-react';
 import { useCallback, useState } from 'react';
 import { useUsuarioStore } from 'src/store/Usuario/usuario-store';
 import type { UsuarioType } from 'src/types/usuario/usuario';
@@ -25,7 +27,7 @@ const initialUsuarioState = {
   name: '',
   email: '',
   password: '',
-  usuario_tipo_id: "fbf94274-9a4b-4372-90a3-b5ff10612a90",
+  usuario_tipo_id: 'fbf94274-9a4b-4372-90a3-b5ff10612a90',
 };
 
 export const CadastrarUsuario = () => {
@@ -63,6 +65,8 @@ export const CadastrarUsuario = () => {
       [name]: value,
     }));
   }, []);
+
+  const [campoSenha, setCampoSenha] = useState('password');
   return (
     <>
       <Button variant={'contained'} onClick={onOpen} startIcon={<IconPlus />}>
@@ -120,12 +124,26 @@ export const CadastrarUsuario = () => {
               id="password"
               name="password" // Importante para o handleInputChange
               label="Senha"
-              type="password"
+              type={campoSenha}
               fullWidth
               variant="outlined"
-              required
               value={usuarioData.password}
               onChange={handleInputChange}
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() =>
+                          setCampoSenha(campoSenha == 'password' ? 'text' : 'password')
+                        }
+                      >
+                        {campoSenha == 'password' ? <IconEye /> : <IconEyeOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                },
+              }}
             />
             <FormControl margin="dense" fullWidth>
               <InputLabel>Tipo de acesso</InputLabel>
@@ -161,7 +179,7 @@ export const CadastrarUsuario = () => {
               // Ícone corrigido: PersonAdd
               startIcon={<PersonAdd />}
               // Desabilita o botão se o nome ou a senha estiverem vazios
-              disabled={!usuarioData.name || !usuarioData.password}
+              disabled={!usuarioData.name || !usuarioData.email}
             >
               Salvar Cadastro
             </Button>

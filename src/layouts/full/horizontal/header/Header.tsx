@@ -19,6 +19,7 @@ import Logo from 'src/layouts/full/shared/logo/Logo';
 import { ProductProvider } from 'src/context/EcommerceContext/index';
 import config from 'src/context/config';
 import { CustomizerContext } from 'src/context/CustomizerContext';
+import { DropDownPefil } from 'src/components/auth/dropdown-perfil';
 
 const Header = () => {
   const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
@@ -52,7 +53,7 @@ const Header = () => {
 
   return (
     <ProductProvider>
-      <AppBarStyled position="sticky" color="default">
+      <AppBarStyled position="sticky" color="default" variant="outlined">
         <ToolbarStyled
           sx={{
             maxWidth: isLayout === 'boxed' ? 'lg' : '100%!important',
@@ -98,7 +99,7 @@ const Header = () => {
               )}
             </IconButton>
             <Notifications />
-            <Profile />
+            <DropDownPefil />
           </Stack>
         </ToolbarStyled>
       </AppBarStyled>

@@ -6,6 +6,7 @@ import { Profile } from './SidebarProfile/Profile';
 import config from 'src/context/config';
 import { CustomizerContext } from 'src/context/CustomizerContext';
 import { useContext } from 'react';
+import { DropDownPefil } from 'src/components/auth/dropdown-perfil';
 
 const Sidebar = () => {
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up('lg'));
@@ -64,7 +65,7 @@ const Sidebar = () => {
             <Scrollbar sx={{ height: 'calc(100% - 190px)', mt: 2 }}>
               <SidebarItems />
             </Scrollbar>
-            <Profile />
+            {/* <DropDownPefil /> */}
           </Box>
         </Drawer>
       </Box>

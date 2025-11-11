@@ -9,6 +9,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Alert,
 } from '@mui/material';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -75,6 +76,17 @@ const ListaUsuarios = () => {
   return (
     <>
       <Grid container spacing={3} mt={2}>
+        {lista_usuario?.length == 0 && (
+          <Grid
+            size={{
+              xs: 12,
+            }}
+          >
+            <Alert variant="standard" severity="info">
+              <Typography>Nenhum acesso cadastrado!</Typography>
+            </Alert>
+          </Grid>
+        )}
         {lista_usuario.map((usuario: any) => {
           return (
             <Grid

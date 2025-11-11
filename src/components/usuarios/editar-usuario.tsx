@@ -1,6 +1,7 @@
 import { Close, Save } from '@mui/icons-material';
 import {
   Button,
+  Container,
   DialogActions,
   DialogContent,
   FormControl,
@@ -45,7 +46,7 @@ export const EditarUsuario = ({ usuario }) => {
     }));
   }, []);
   return (
-    <>
+    <Container>
       <Box component="form" onSubmit={handleSubmit}>
         <DialogContent dividers>
           {/* Campo Nome */}
@@ -123,6 +124,6 @@ export const EditarUsuario = ({ usuario }) => {
           </Button>
         </DialogActions>
       </Box>
-    </>
+    </Container>
   );
 };

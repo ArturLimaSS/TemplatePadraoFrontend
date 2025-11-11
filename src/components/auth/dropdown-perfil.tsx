@@ -9,7 +9,7 @@ import { IconSettings } from '@tabler/icons-react';
 import { useAuthStore } from 'src/store/Auth/auth-store';
 import { useAlert } from 'src/context/Alert/useAlert';
 
-const Profile = () => {
+export const DropDownPefil = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
   const handleClick2 = (event: any) => {
     setAnchorEl2(event.currentTarget);
@@ -67,6 +67,7 @@ const Profile = () => {
       {/* Message Dropdown */}
       {/* ------------------------------------------- */}
       <Menu
+        elevation={2}
         id="msgs-menu"
         anchorEl={anchorEl2}
         keepMounted
@@ -82,7 +83,6 @@ const Profile = () => {
           },
         }}
       >
-        <Typography variant="h5">User Profile</Typography>
         <Stack direction="row" py={3} spacing={2} alignItems="center">
           <Avatar
             src={usuario_logado?.name}
@@ -174,5 +174,3 @@ const Profile = () => {
     </Box>
   );
 };
-
-export default Profile;

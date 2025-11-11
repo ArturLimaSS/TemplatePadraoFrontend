@@ -27,7 +27,6 @@ export const BuildTheme = (config: any = {}) => {
     shape: {
       borderRadius: isBorderRadius,
     },
-    shadows: defaultShadow,
     typography: typography,
   };
   const theme = createTheme(
