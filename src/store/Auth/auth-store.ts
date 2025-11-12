@@ -7,6 +7,7 @@ import type { userType } from "src/types/apps/users";
 import type { UsuarioType } from "src/types/usuario/usuario";
 
 
+
 interface AuthState {
   isAuthenticated: boolean;
   isAuthLoading: boolean;
@@ -23,6 +24,7 @@ interface AuthState {
   login: (payload: loginFormType) => Promise<any | undefined>;
   atualizarAcesso: (payload: UsuarioType) => Promise<any | undefined>;
   initializeAuth: () => Promise<void>;
+  acessarModulo: (modulo_id: string) => Promise<any | undefined>;
   logout: () => void;
 }
 
@@ -114,6 +116,19 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ isAuthLoading: true })
     try {
       const response = await api.put("/v1/auth/atualizar-acesso", payload);
+      set({ isAuthLoading: false })
+      return response;
+    } catch (error) {
+      set({ isAuthLoading: false })
+      return ReturnError(error)
+    }
+  },
+  acessarModulo: async (modulo_id: string) => {
+    set({ isAuthLoading: true })
+    try {
+      const response = await api.post("/v1/auth/acessar-modulo", {
+        modulo_id
+      });
       set({ isAuthLoading: false })
       return response;
     } catch (error) {

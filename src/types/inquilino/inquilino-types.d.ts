@@ -1,3 +1,5 @@
+import type { ModuloType } from "src/store/Inquilino/inquilino-store";
+
 export interface InquilinoType {
   "id"?: number | string;
   "nome"?: string;
@@ -16,12 +18,10 @@ export interface InquilinoType {
 }
 
 export interface ModulosType {
-  id?: number;
-  nome?: string;
-  prefixo?: string;
-  ativo?: number;
-  created_at?: string | null;
-  updated_at?: string | null;
+  id: number | string;
+  nome: string;
+  prefixo: string;
+  ativo: boolean | number | string;
 }
 
 
@@ -33,5 +33,5 @@ export interface UsuarioModuloType {
   ativo?: number;
   created_at?: string;
   updated_at?: string;
-  modulo?: ModulosType;
+  modulo: ModulosType;
 }

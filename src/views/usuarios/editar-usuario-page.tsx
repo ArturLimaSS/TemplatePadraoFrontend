@@ -2,6 +2,7 @@ import { TabContext, TabPanel } from '@mui/lab';
 import { Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 import { useLocation } from 'react-router';
+import { ModulosTab } from 'src/components/auth/modulos-tab';
 import PageContainer from 'src/components/container/PageContainer';
 import { EditarUsuario } from 'src/components/usuarios/editar-usuario';
 
@@ -11,7 +12,7 @@ const EditarUsuarioPage = () => {
 
   const tabs = [
     { nome: 'Dados de acesso', component: <EditarUsuario usuario={usuario} /> },
-    { nome: 'Módulos', component: <div>Módulos</div> },
+    { nome: 'Módulos', component: <ModulosTab usuario={usuario} /> },
   ];
 
   const [selectedTab, setSelectedTab] = useState('0');

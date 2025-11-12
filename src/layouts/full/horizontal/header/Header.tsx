@@ -40,7 +40,8 @@ const Header = () => {
     background: theme.palette.background.paper,
     justifyContent: 'center',
     backdropFilter: 'blur(4px)',
-
+    borderLeft: 0,
+    borderRight: 0,
     [theme.breakpoints.up('lg')]: {
       minHeight: TopbarHeight,
     },
