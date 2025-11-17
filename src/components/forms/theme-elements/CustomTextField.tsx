@@ -27,8 +27,4 @@ const CustomTextField = styled(
   },
 }));
 
-CustomTextField.defaultProps = {
-  size: 'small',
-};
-
 export default CustomTextField;

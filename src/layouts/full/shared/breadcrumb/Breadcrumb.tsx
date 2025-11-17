@@ -20,6 +20,7 @@ const Breadcrumb = ({ items, title, action }: BreadCrumbType) => (
       overflow: 'hidden',
       display: 'flex',
       justifyContent: 'space-between',
+      pb: 1,
     }}
   >
     <Stack direction={'column'} mb={1}>

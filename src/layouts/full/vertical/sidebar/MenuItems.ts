@@ -32,7 +32,7 @@ const Menuitems: MenuitemsType[] = [
     id: 2,
     title: 'Usuários',
     icon: IconUsers,
-    usuario_tipo_id: ["a61b6f23-cdc0-4b79-b372-3b02f6ac0c93", "be506f43-742c-4b04-b288-6bd2e6ffd07e"],
+    usuario_tipo_id: ["a61b6f23-cdc0-4b79-b372-3b02f6ac0c93", "fbf94274-9a4b-4372-90a3-b5ff10612a90"],
     href: '/usuarios',
   },
   {

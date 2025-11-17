@@ -10,6 +10,7 @@ import {
   Menu,
   MenuItem,
   Alert,
+  Card,
 } from '@mui/material';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -96,29 +97,31 @@ const ListaUsuarios = () => {
                 lg: 4,
               }}
             >
-              <BlankCard>
+              <Card elevation={0}>
                 <CardContent>
-                  <Stack direction={'row'} gap={2} alignItems="center">
-                    <Avatar alt="Remy Sharp" src={usuario.avatar} />
-                    <Box>
-                      <Typography variant="h6" textOverflow={'ellipsis'} noWrap>
-                        {usuario.name}
-                      </Typography>
-                      <Typography
-                        variant="caption"
-                        sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
-                      >
-                        Administrador
-                      </Typography>
-                    </Box>
-                    <Box ml="auto">
-                      <IconButton onClick={(e) => onOpenMenu(e, usuario)}>
-                        <MoreVert />
-                      </IconButton>
-                    </Box>
-                  </Stack>
+                  <Box>
+                    <Stack direction={'row'} gap={2} alignItems="center" justifyContent={'center'}>
+                      <Avatar alt="Remy Sharp" src={usuario.avatar} />
+                      <Box>
+                        <Typography variant="h6" textOverflow={'ellipsis'} noWrap>
+                          {usuario.name}
+                        </Typography>
+                        <Typography
+                          variant="caption"
+                          sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
+                        >
+                          Administrador
+                        </Typography>
+                      </Box>
+                      <Box ml="auto">
+                        <IconButton onClick={(e) => onOpenMenu(e, usuario)}>
+                          <MoreVert />
+                        </IconButton>
+                      </Box>
+                    </Stack>
+                  </Box>
                 </CardContent>
-              </BlankCard>
+              </Card>
             </Grid>
           );
         })}

@@ -10,7 +10,7 @@ const config = {
   isCardShadow: false,
   isMobileSidebar: false,
   isHorizontal: true,
-  isBorderRadius: 16,
+  isBorderRadius: 14,
   sidebarWidth: 230,
   miniSidebarWidth: 87,
   topbarHeight: 70,
