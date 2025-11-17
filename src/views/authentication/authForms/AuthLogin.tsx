@@ -31,12 +31,6 @@ const AuthLogin = ({ title, subtitle }: loginType) => {
   };
   return (
     <>
-      {title ? (
-        <Typography fontWeight="700" variant="h3" mb={1}>
-          {title}
-        </Typography>
-      ) : null}
-
       {/* {subtext} */}
 
       <Stack>

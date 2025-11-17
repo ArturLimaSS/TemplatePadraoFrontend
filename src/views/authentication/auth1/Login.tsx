@@ -7,6 +7,7 @@ import PageContainer from 'src/components/container/PageContainer';
 import img1 from 'src/assets/images/backgrounds/login-bg.svg';
 import Logo from 'src/layouts/full/shared/logo/Logo';
 import AuthLogin from '../authForms/AuthLogin';
+import LogoLogin from 'src/layouts/full/shared/logo/LogoLogin';
 
 const Login = () => (
   <PageContainer title="Login" description="this is Login page">
@@ -28,33 +29,21 @@ const Login = () => (
         size={{
           xs: 12,
           sm: 12,
-          lg: 6,
+          lg: 8,
         }}
       >
         <Box position="relative">
-          <Box px={3}>
-            <Logo />
-          </Box>
           <Box
             alignItems="center"
             justifyContent="center"
-            height={'calc(100vh - 75px)'}
+            height={'calc(100vh)'}
             sx={{
               display: {
                 xs: 'none',
                 lg: 'flex',
               },
             }}
-          >
-            <img
-              src={img1}
-              alt="bg"
-              style={{
-                width: '100%',
-                maxWidth: '500px',
-              }}
-            />
-          </Box>
+          ></Box>
         </Box>
       </Grid>
       <Grid
@@ -64,31 +53,12 @@ const Login = () => (
         size={{
           xs: 12,
           sm: 12,
-          lg: 6,
+          lg: 4,
         }}
       >
         <Box p={4}>
-          <AuthLogin
-            title="Seja bem vindo"
-            subtitle={
-              <Stack direction="row" spacing={1} mt={3}>
-                <Typography color="textSecondary" variant="h6" fontWeight="500">
-                  New to OrCloud?
-                </Typography>
-                <Typography
-                  component={Link}
-                  to="/auth/register"
-                  fontWeight="500"
-                  sx={{
-                    textDecoration: 'none',
-                    color: 'primary.main',
-                  }}
-                >
-                  Create an account
-                </Typography>
-              </Stack>
-            }
-          />
+          <LogoLogin />
+          <AuthLogin title="Seja bem vindo" />
         </Box>
       </Grid>
     </Grid>

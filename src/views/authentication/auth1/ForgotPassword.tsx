@@ -71,7 +71,7 @@ const ForgotPassword = () => (
         }}>
         <Box p={4}>
           <Typography variant="h4" fontWeight="700">
-            Forgot your password?
+            Esqueceu a sua senha?
           </Typography>
 
           <Typography color="textSecondary" variant="subtitle2" fontWeight="400" mt={2}>
