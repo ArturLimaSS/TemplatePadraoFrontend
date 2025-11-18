@@ -6,11 +6,22 @@ import type { InquilinoType, UsuarioModuloType } from "src/types/inquilino/inqui
 import type { userType } from "src/types/apps/users";
 import type { UsuarioType } from "src/types/usuario/usuario";
 
-
+export interface IInquilinoUsuario {
+  id: string;
+  inquilino_id: string;
+  usuario_id: string;
+  usuario_tipo_id: string;
+  ativo: number;
+  created_at: string;
+  updated_at: string;
+  inquilino: InquilinoType;
+}
 
 interface AuthState {
   isAuthenticated: boolean;
+  isTenantSelected: boolean;
   isAuthLoading: boolean;
+  lista_inquilinos_usuario: IInquilinoUsuario[],
   usuario_modulos: UsuarioModuloType[];
   inquilino: InquilinoType;
   usuario_logado?: UsuarioType | null,
@@ -25,12 +36,16 @@ interface AuthState {
   atualizarAcesso: (payload: UsuarioType) => Promise<any | undefined>;
   initializeAuth: () => Promise<void>;
   acessarModulo: (modulo_id: string) => Promise<any | undefined>;
+  listarInquilinosUsuario: () => Promise<any | undefined>;
+  selecionarInquilino: (inquilino_id: string | number | null) => Promise<any | undefined>;
   logout: () => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: !!localStorage.getItem('token'),
+  isTenantSelected: !!localStorage.getItem('tenant_user_session_id'),
   isAuthLoading: false,
+  lista_inquilinos_usuario: [],
   usuario_modulos: [],
   usuario_logado: null,
   usuario_tipo: {},
@@ -63,7 +78,6 @@ export const useAuthStore = create<AuthState>((set) => ({
       setTimeout(() => {
         set({
           isAuthenticated: true, isAuthLoading: false,
-
         });
       }, 1000)
       return response;
@@ -77,6 +91,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   initializeAuth: async () => {
     set({ isAuthLoading: true });
     try {
+
       const response = await api.post('/v1/auth/check');
       // const user = JSON.parse(localStorage.getItem('user') || 'null');
       set({
@@ -90,6 +105,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       // Token inválido ou expirado
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem("tenant_user_session_id")
       set({ isAuthenticated: false, isAuthLoading: false, });
       // setTimeout(() => {
       //   window.location.href = "/auth/login"
@@ -105,6 +121,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem("tenant_user_session_id")
       set({ isAuthenticated: false });
 
       return response;
@@ -130,6 +147,32 @@ export const useAuthStore = create<AuthState>((set) => ({
         modulo_id
       });
       set({ isAuthLoading: false })
+      return response;
+    } catch (error) {
+      set({ isAuthLoading: false })
+      return ReturnError(error)
+    }
+  },
+  listarInquilinosUsuario: async () => {
+    set({ isAuthLoading: true })
+    try {
+      const response = await api.get("/v1/auth/listar-inquilinos-usuario",);
+      set({ isAuthLoading: false, lista_inquilinos_usuario: response.data.lista_inquilinos_usuario })
+      return response;
+    } catch (error) {
+      set({ isAuthLoading: false })
+      return ReturnError(error)
+    }
+  },
+  selecionarInquilino: async (inquilino_id: string | number | null) => {
+    set({ isAuthLoading: true })
+    try {
+      const response = await api.post("/v1/auth/selecionar-inquilino", {
+        inquilino_id
+      });
+
+      localStorage.setItem("tenant_user_session_id", response.data.tenant_user_session_id);
+      set({ isAuthLoading: false, isTenantSelected: true })
       return response;
     } catch (error) {
       set({ isAuthLoading: false })

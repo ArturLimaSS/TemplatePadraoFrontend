@@ -24,7 +24,6 @@ const AuthLogin = ({ title, subtitle }: loginType) => {
     const response = await login(authData);
     if (response?.status == 200) {
       swalSucesso('Login realizado com sucesso!');
-      setTimeout(() => initializeAuth(), 2000);
     } else {
       swalErro('Credenciais inválidas');
     }

@@ -5,14 +5,14 @@ const config = {
   activeLayout: 'vertical', // This can be vertical or horizontal
   isLayout: 'full', // This can be full or boxed
   isSidebarHover: false,
-  isCollapse: 'full-sidebar',
+  isCollapse: 'mini-sidebar',
   isLanguage: 'en',
   isCardShadow: false,
   isMobileSidebar: false,
   isHorizontal: true,
   isBorderRadius: 14,
   sidebarWidth: 230,
-  miniSidebarWidth: 87,
+  miniSidebarWidth: 60,
   topbarHeight: 70,
 };
 

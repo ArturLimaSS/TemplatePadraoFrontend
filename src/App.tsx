@@ -8,25 +8,36 @@ import { CustomizerContext } from 'src/context/CustomizerContext';
 import { useContext, useEffect, useState } from 'react';
 import { useAuthStore } from './store/Auth/auth-store';
 import { AlertProvider } from './context/Alert/useAlert';
+import intermediateRoutes from './routes/IntermediateRouter';
 
 const privateRouter = createBrowserRouter(router);
 const publicRouter = createBrowserRouter(publicRoutes);
+const intermediateRouter = createBrowserRouter(intermediateRoutes);
 
 function App() {
   const theme = ThemeSettings();
   const { activeDir } = useContext(CustomizerContext);
   const { isAuthenticated, initializeAuth } = useAuthStore();
+  const tenant_user_session_id = localStorage.getItem('tenant_user_session_id');
 
   const [currentRouter, setCurrentRouter] = useState(
-    isAuthenticated ? privateRouter : publicRouter,
+    isAuthenticated ? (tenant_user_session_id ? privateRouter : intermediateRouter) : publicRouter,
   );
 
   useEffect(() => {
-    setCurrentRouter(isAuthenticated ? privateRouter : publicRouter);
-  }, [isAuthenticated]);
+    setCurrentRouter(
+      isAuthenticated
+        ? tenant_user_session_id
+          ? privateRouter
+          : intermediateRouter
+        : publicRouter,
+    );
+  }, [isAuthenticated, tenant_user_session_id]);
 
   const handleInit = async () => {
-    await initializeAuth();
+    if (tenant_user_session_id != null || tenant_user_session_id != undefined) {
+      await initializeAuth();
+    }
     // if (isAuthenticated) {
     //   setCurrentRouter(privateRouter);
     // } else {

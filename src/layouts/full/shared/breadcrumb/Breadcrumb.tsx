@@ -6,7 +6,7 @@ import { NavLink } from 'react-router';
 
 interface BreadCrumbType {
   items?: any[];
-  title: string;
+  title?: string;
   action?: ReactNode;
 }
 
@@ -62,9 +62,9 @@ const Breadcrumb = ({ items, title, action }: BreadCrumbType) => (
             ))
           : ''}
       </Breadcrumbs>
-      <Typography variant="h2" sx={{ fontWeight: '900' }}>
+      {/* <Typography variant="h2" sx={{ fontWeight: '900' }}>
         {title}
-      </Typography>
+      </Typography> */}
     </Stack>
     {action && <Box sx={{ display: 'flex', alignItems: 'end' }}>{action}</Box>}
   </Box>

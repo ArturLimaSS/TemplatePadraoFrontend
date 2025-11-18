@@ -16,6 +16,9 @@ export interface RouteType {
   user_type_id?: string[] | [];
   children?: RouteType[];
 }
+
+const tenant_user_session_id = localStorage.getItem('tenant_user_session_id');
+
 const router: RouteType[] = [
   {
     path: '/',
