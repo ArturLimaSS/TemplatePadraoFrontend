@@ -4,9 +4,7 @@ import {
   Stack,
   Avatar,
   Grid,
-  Button,
   Typography,
-  IconButton,
   Menu,
   MenuItem,
   Alert,
@@ -16,14 +14,13 @@ import {
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import React, { useContext, useEffect, useState } from 'react';
-import BlankCard from 'src/components/shared/BlankCard';
 import { useUsuarioStore } from 'src/store/Usuario/usuario-store';
 import { useNavigate } from 'react-router';
 import { useAlert } from 'src/context/Alert/useAlert';
-import { MoreVert } from '@mui/icons-material';
 import type { UsuarioType } from 'src/types/usuario/usuario';
 import { useLoading } from 'src/context/LoadingContext/LoadingContext';
 import { swalErro, swalSucesso } from 'src/utils/swal';
+import { EditarUsuario } from './editar-usuario';
 
 const ListaUsuarios = () => {
   const { lista_usuario, listarUsuario, excluirUsuario, isUsuarioLoading } = useUsuarioStore();
@@ -114,9 +111,7 @@ const ListaUsuarios = () => {
                         </Typography>
                       </Box>
                       <Box ml="auto">
-                        <IconButton onClick={(e) => onOpenMenu(e, usuario)}>
-                          <MoreVert />
-                        </IconButton>
+                        <EditarUsuario usuario={usuario} />
                       </Box>
                     </Stack>
                   </Box>
@@ -126,18 +121,6 @@ const ListaUsuarios = () => {
           );
         })}
       </Grid>
-
-      <Menu open={menuOpen} onClose={onCloseMenu} anchorEl={anchorEl}>
-        <MenuItem
-          onClick={() => navigate('/usuarios/editar', { state: { usuario: usuarioSelecionado } })}
-          color="primary"
-        >
-          Editar
-        </MenuItem>
-        <MenuItem onClick={() => handleExcluirUsuario(usuarioSelecionado)} color="primary">
-          Excluir
-        </MenuItem>
-      </Menu>
     </>
   );
 };
