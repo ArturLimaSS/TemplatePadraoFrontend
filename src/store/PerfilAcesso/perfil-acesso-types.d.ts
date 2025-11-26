@@ -23,7 +23,6 @@ export type PrefixoModulo =
   | "estoque"
   | "producao";
 
-
 export interface PerfilAcessoType {
   id?: string | number;
   nome?: string;

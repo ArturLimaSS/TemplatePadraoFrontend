@@ -5,8 +5,9 @@ import { ReturnError } from "src/utils/functions";
 import type { InquilinoType, UsuarioModuloType } from "src/types/inquilino/inquilino-types";
 import type { userType } from "src/types/apps/users";
 import type { UsuarioType } from "src/types/usuario/usuario";
+import type { PerfilAcessoType } from "../PerfilAcesso/perfil-acesso-types";
 
-export interface IInquilinoUsuario {
+export interface InquilinoUsuario {
   id: string;
   inquilino_id: string;
   usuario_id: string;
@@ -21,8 +22,9 @@ interface AuthState {
   isAuthenticated: boolean;
   isTenantSelected: boolean;
   isAuthLoading: boolean;
-  lista_inquilinos_usuario: IInquilinoUsuario[],
+  lista_inquilinos_usuario: InquilinoUsuario[],
   usuario_modulos: UsuarioModuloType[];
+  perfil_acesso?: PerfilAcessoType;
   inquilino: InquilinoType;
   usuario_logado?: UsuarioType | null,
   usuario_tipo_id: number;
@@ -48,6 +50,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   lista_inquilinos_usuario: [],
   usuario_modulos: [],
   usuario_logado: null,
+  perfil_acesso: {},
   usuario_tipo: {},
   usuario_tipo_id: 0,
   inquilino: {
@@ -94,9 +97,12 @@ export const useAuthStore = create<AuthState>((set) => ({
 
       const response = await api.post('/v1/auth/check');
       // const user = JSON.parse(localStorage.getItem('user') || 'null');
+
+      const perfilAcessoResponse = response.data.inquilinoUsuario.perfil_acesso;
       set({
         isAuthenticated: true, isAuthLoading: false, usuario_modulos: response.data.usuario_modulos,
         inquilino: response.data.inquilino,
+        perfil_acesso: typeof perfilAcessoResponse == "string" ? JSON.parse(perfilAcessoResponse) : perfilAcessoResponse, 
         usuario_tipo_id: response.data.inquilinoUsuario.usuario_tipo_id,
         usuario_logado: response.data.user,
         usuario_tipo: response.data.inquilinoUsuario.usuario_tipo

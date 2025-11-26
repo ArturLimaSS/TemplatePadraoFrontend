@@ -46,7 +46,6 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
   const { listarPerfilAcesso, lista_perfil_acesso } = usePerfilAcessoStore();
 
   const { lista_modulos, listarModulos } = useInquilino();
-  const navigate = useNavigate();
   useEffect(() => {
     listarUsuarioTipo();
   }, []);
@@ -196,8 +195,6 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
           <DialogTitle>Editar Usuário</DialogTitle>
           <DialogContent dividers>
             <Card>
-              <Button onClick={() => console.log(usuarioData)}>UsuarioData</Button>
-              {/* Campo Nome */}
               <CardHeader title="Dados Cadastrais" />
               <CardContent>
                 <Grid container spacing={2}>
