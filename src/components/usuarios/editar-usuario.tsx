@@ -42,7 +42,7 @@ interface EditarUsuarioProps {
   usuario: UsuarioType;
 }
 export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
-  const { atualizarUsuario, listarUsuarioTipo, lista_usuario_tipo } = useUsuarioStore();
+  const { atualizarUsuario, listarUsuarioTipo, lista_usuario_tipo, listarUsuario } = useUsuarioStore();
   const { listarPerfilAcesso, lista_perfil_acesso } = usePerfilAcessoStore();
 
   const { lista_modulos, listarModulos } = useInquilino();
@@ -53,15 +53,19 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
 
   const [usuarioData, setUsuarioData] = useState<UsuarioType>({
     ...initialUsuarioState,
-    ...usuario,
+      ...usuario,
+      inquilino_usuario: {
+        ...usuario.inquilino_usuario,
+        perfil_acesso: JSON.parse(String(usuario.inquilino_usuario?.perfil_acesso))
+      }
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const response = await atualizarUsuario(usuarioData);
     if (response.status == 200) {
+      listarUsuario();
       toastSucesso('Usuário atualizado com sucesso!');
-      navigate('/usuarios');
     } else {
       toastErro('Ocorreu um erro ao tentar atualizar o usuário');
     }
@@ -83,11 +87,18 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
     setOpen(true);
     listarPerfilAcesso();
     listarModulos();
+    setUsuarioData({
+      ...usuario,
+      inquilino_usuario: {
+        ...usuario.inquilino_usuario,
+        perfil_acesso: JSON.parse(String(usuario.inquilino_usuario?.perfil_acesso))
+      }
+    });
   };
 
   const onClose = () => {
     setOpen(false);
-    setUsuarioData(usuario);
+    
   };
 
   const handleSetPerfilAcesso = (id: string) => {
@@ -185,6 +196,7 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
           <DialogTitle>Editar Usuário</DialogTitle>
           <DialogContent dividers>
             <Card>
+              <Button onClick={() => console.log(usuarioData)}>UsuarioData</Button>
               {/* Campo Nome */}
               <CardHeader title="Dados Cadastrais" />
               <CardContent>
@@ -368,8 +380,9 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
                 const permissoes = usuarioData?.inquilino_usuario?.perfil_acesso?.[prefixo];
 
                 return (
-                  <Box key={prefixo} sx={{ mt: 2 }}>
-                    <FormControlLabel
+                  <Card key={prefixo} sx={{ mt: 2 }}>
+                    <CardContent>
+                      <FormControlLabel
                       control={
                         <Switch
                           checked={Object.entries(
@@ -397,7 +410,8 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
                         />
                       ))}
                     </Box>
-                  </Box>
+                    </CardContent>
+                  </Card>
                 );
               })}
           </DialogContent>
