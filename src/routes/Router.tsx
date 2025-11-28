@@ -3,7 +3,6 @@
 import React, { type ReactNode } from 'react';
 import { Navigate } from 'react-router';
 import FullLayout from 'src/layouts/full/FullLayout';
-import UserProfile from 'src/views/apps/user-profile/UserProfile';
 import Painel from 'src/views/painel/painel';
 import PerfilUsuario from 'src/views/perfil/perfil-usuario';
 import PerfisDeAcesso from 'src/views/perfis-de-acesso/perfis-de-acesso';
@@ -18,7 +17,6 @@ export interface RouteType {
   children?: RouteType[];
 }
 
-const tenant_user_session_id = localStorage.getItem('tenant_user_session_id');
 
 const router: RouteType[] = [
   {

@@ -14,9 +14,7 @@ import {
 
 import { IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
 import Notifications from 'src/layouts/full/vertical/header/Notification';
-import Profile from 'src/layouts/full/vertical/header/Profile';
 import Logo from 'src/layouts/full/shared/logo/Logo';
-import { ProductProvider } from 'src/context/EcommerceContext/index';
 import config from 'src/context/config';
 import { CustomizerContext } from 'src/context/CustomizerContext';
 import { DropDownPefil } from 'src/components/auth/dropdown-perfil';
@@ -53,7 +51,7 @@ const Header = () => {
   }));
 
   return (
-    <ProductProvider>
+    <>
       <AppBarStyled position="sticky" color="default" variant="outlined">
         <ToolbarStyled
           sx={{
@@ -104,7 +102,7 @@ const Header = () => {
           </Stack>
         </ToolbarStyled>
       </AppBarStyled>
-    </ProductProvider>
+    </>
   );
 };
 

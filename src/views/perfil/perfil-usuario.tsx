@@ -3,7 +3,6 @@
 import React from 'react';
 import PageContainer from 'src/components/container/PageContainer';
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
-import { UserDataProvider } from 'src/context/UserDataContext/index';
 import { Grid } from '@mui/material';
 import { DadosAcesso } from 'src/components/auth/dados-acesso';
 
@@ -18,7 +17,7 @@ const PerfilUsuario = () => {
     },
   ];
   return (
-    <UserDataProvider>
+    <>
       <PageContainer title="Meu Perfil | OrCloud" description="Pagina do perfil do usuario">
         <Breadcrumb title="Meu Perfil" items={BCrumb} />
       </PageContainer>
@@ -31,7 +30,7 @@ const PerfilUsuario = () => {
           <DadosAcesso />
         </Grid>
       </Grid>
-    </UserDataProvider>
+    </>
   );
 };
 

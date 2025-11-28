@@ -8,11 +8,7 @@ import Login2 from 'src/views/authentication/auth2/Login2';
 import TwoSteps2 from 'src/views/authentication/auth2/TwoSteps2';
 import Error from 'src/views/authentication/Error';
 import Maintenance from 'src/views/authentication/Maintenance';
-import About from 'src/views/pages/frontend-pages/About';
-import BlogPage from 'src/views/pages/frontend-pages/Blog';
-import Contact from 'src/views/pages/frontend-pages/Contact';
-import HomePage from 'src/views/pages/frontend-pages/Homepage';
-import Landingpage from 'src/views/pages/landingpage/Landingpage';
+
 import type { RouteType } from './Router';
 
 const routes: RouteType[] = [
@@ -30,11 +26,6 @@ const routes: RouteType[] = [
       { path: '/auth/two-steps', element: <TwoSteps /> },
       { path: '/auth/two-steps2', element: <TwoSteps2 /> },
       { path: '/auth/maintenance', element: <Maintenance /> },
-      { path: '/landingpage', element: <Landingpage /> },
-      { path: '/frontend-pages/homepage', element: <HomePage /> },
-      { path: '/frontend-pages/about', element: <About /> },
-      { path: '/frontend-pages/contact', element: <Contact /> },
-      { path: '/frontend-pages/blog', element: <BlogPage /> },
     ],
   },
 ];

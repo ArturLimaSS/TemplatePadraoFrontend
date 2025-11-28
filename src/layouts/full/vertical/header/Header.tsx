@@ -2,16 +2,9 @@ import { IconButton, Box, AppBar, useMediaQuery, Toolbar, styled, Stack } from '
 
 import config from 'src/context/config';
 import { useContext } from 'react';
-import { ProductProvider } from 'src/context/EcommerceContext/index';
 
 import { IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
-import Notifications from './Notification';
-import Profile from './Profile';
-import Cart from './Cart';
-import Search from './Search';
-import Language from './Language';
-import Navigation from './Navigation';
-import MobileRightSidebar from './MobileRightSidebar';
+
 import { CustomizerContext } from 'src/context/CustomizerContext';
 import Logo from '../../shared/logo/Logo';
 
@@ -46,7 +39,7 @@ const Header = () => {
   }));
 
   return (
-    <ProductProvider>
+    <>
       <AppBarStyled position="sticky" color="default">
         <ToolbarStyled>
           {/* ------------------------------------------- */}
@@ -102,7 +95,7 @@ const Header = () => {
           </Stack>
         </ToolbarStyled>
       </AppBarStyled>
-    </ProductProvider>
+    </>
   );
 };
 
