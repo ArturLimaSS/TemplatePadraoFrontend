@@ -6,6 +6,7 @@ import {
   CardContent,
   CardHeader,
   Checkbox,
+  Chip,
   Collapse,
   Dialog,
   DialogActions,
@@ -37,6 +38,7 @@ import type { PrefixoModulo } from 'src/store/PerfilAcesso/perfil-acesso-types';
 import { apenasNumerosInteiros, clareiaCorEmEx, cpfMask, formatPhone } from 'src/utils/mask';
 import CustomFormLabel from '../forms/theme-elements/CustomFormLabel';
 import { DynamicTablerIcon, type TablerIconName } from '../ui/dynamic-tabler-icon';
+import { IconLock, IconUserCircle } from '@tabler/icons-react';
 
 const initialUsuarioState: UsuarioType = {
   id: null,
@@ -203,8 +205,21 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
             }}
           >
             <Card>
-              <CardHeader title="Dados Cadastrais" />
               <CardContent>
+                <Box
+                  sx={{
+                    color: 'text.disabled',
+                    display: 'flex',
+                    gap: 1,
+                    alignItems: 'center',
+                    mb: 1,
+                  }}
+                >
+                  <IconUserCircle size={20} />
+                  <Typography variant="body2" fontWeight={900}>
+                    DADOS CADASTRAIS
+                  </Typography>
+                </Box>
                 <Grid container spacing={2}>
                   <Grid
                     size={{
@@ -384,6 +399,40 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
                 </Grid>
               </CardContent>
             </Card>
+
+            <Box
+              sx={{
+                color: 'text.disabled',
+                display: 'flex',
+                gap: 1,
+                alignItems: 'center',
+                my: 2,
+                justifyContent: 'space-between',
+              }}
+            >
+              <Box
+                sx={{
+                  color: 'text.disabled',
+                  display: 'flex',
+                  gap: 1,
+                  alignItems: 'center',
+                }}
+              >
+                <IconLock size={20} />
+                <Typography variant="body2" fontWeight={900}>
+                  {String('Acesso aos Módulos').toUpperCase()}
+                </Typography>
+              </Box>
+
+              <Chip
+                label={
+                  Object.entries(usuarioData?.inquilino_usuario?.perfil_acesso ?? {})
+                    ?.filter(([key, _]) => lista_modulos?.map((m) => m.prefixo).includes(key))
+                    .flatMap(([_, value]) => (value ? value : [])).length  + ' permissões'
+                }
+                size="small"
+              />
+            </Box>
             {Object.entries(usuarioData?.inquilino_usuario?.perfil_acesso ?? {}).length > 0 &&
               lista_modulos?.map((modulo) => {
                 const prefixo = modulo.prefixo as PrefixoModulo;

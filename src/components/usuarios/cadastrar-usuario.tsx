@@ -6,6 +6,7 @@ import {
   CardContent,
   CardHeader,
   Checkbox,
+  Chip,
   Collapse,
   Dialog,
   DialogActions,
@@ -22,7 +23,7 @@ import {
   Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import { IconPlus } from '@tabler/icons-react';
+import { IconLock, IconPlus, IconUserCircle } from '@tabler/icons-react';
 import { useCallback, useState } from 'react';
 import { useUsuarioStore } from 'src/store/Usuario/usuario-store';
 import type { UsuarioType } from 'src/types/usuario/usuario';
@@ -195,8 +196,21 @@ export const CadastrarUsuario = () => {
             }}
           >
             <Card>
-              <CardHeader title="Dados Cadastrais" />
               <CardContent>
+                <Box
+                  sx={{
+                    color: 'text.disabled',
+                    display: 'flex',
+                    gap: 1,
+                    alignItems: 'center',
+                    mb: 1,
+                  }}
+                >
+                  <IconUserCircle size={20} />
+                  <Typography variant="body2" fontWeight={900}>
+                    DADOS CADASTRAIS
+                  </Typography>
+                </Box>
                 <Grid container spacing={2}>
                   <Grid
                     size={{
@@ -376,6 +390,40 @@ export const CadastrarUsuario = () => {
                 </Grid>
               </CardContent>
             </Card>
+
+            <Box
+              sx={{
+                color: 'text.disabled',
+                display: 'flex',
+                gap: 1,
+                alignItems: 'center',
+                my: 2,
+                justifyContent: 'space-between',
+              }}
+            >
+              <Box
+                sx={{
+                  color: 'text.disabled',
+                  display: 'flex',
+                  gap: 1,
+                  alignItems: 'center',
+                }}
+              >
+                <IconLock size={20} />
+                <Typography variant="body2" fontWeight={900}>
+                  {String('Acesso aos Módulos').toUpperCase()}
+                </Typography>
+              </Box>
+
+              <Chip
+                label={
+                  Object.entries(usuarioData?.inquilino_usuario?.perfil_acesso ?? {})
+                    ?.filter(([key, _]) => lista_modulos?.map((m) => m.prefixo).includes(key))
+                    .flatMap(([_, value]) => (value ? value : [])).length + ' permissões'
+                }
+                size="small"
+              />
+            </Box>
             {Object.entries(usuarioData?.inquilino_usuario?.perfil_acesso ?? {}).length > 0 &&
               lista_modulos?.map((modulo) => {
                 const prefixo = modulo.prefixo as PrefixoModulo;
