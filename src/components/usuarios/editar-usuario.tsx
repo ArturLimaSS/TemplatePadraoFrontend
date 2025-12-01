@@ -2,20 +2,26 @@ import { Close, Edit, Save } from '@mui/icons-material';
 import {
   Button,
   Card,
+  CardActionArea,
   CardContent,
   CardHeader,
   Checkbox,
+  Collapse,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  Fade,
   FormControl,
   FormControlLabel,
   Grid,
+  Grow,
   IconButton,
   InputLabel,
   MenuItem,
+  Stack,
   Switch,
+  Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import { useCallback, useEffect, useState } from 'react';
@@ -28,13 +34,16 @@ import { useNavigate } from 'react-router';
 import { usePerfilAcessoStore } from 'src/store/PerfilAcesso/perfil-acesso-store';
 import { useInquilino } from 'src/store/Inquilino/inquilino-store';
 import type { PrefixoModulo } from 'src/store/PerfilAcesso/perfil-acesso-types';
-import { apenasNumerosInteiros, formatPhone } from 'src/utils/mask';
+import { apenasNumerosInteiros, clareiaCorEmEx, cpfMask, formatPhone } from 'src/utils/mask';
+import CustomFormLabel from '../forms/theme-elements/CustomFormLabel';
+import { DynamicTablerIcon, type TablerIconName } from '../ui/dynamic-tabler-icon';
 
-const initialUsuarioState = {
+const initialUsuarioState: UsuarioType = {
   id: null,
   name: '',
   email: '',
   password: '',
+  documento: '',
   usuario_tipo_id: 'fbf94274-9a4b-4372-90a3-b5ff10612a90',
 };
 
@@ -42,7 +51,8 @@ interface EditarUsuarioProps {
   usuario: UsuarioType;
 }
 export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
-  const { atualizarUsuario, listarUsuarioTipo, lista_usuario_tipo, listarUsuario } = useUsuarioStore();
+  const { atualizarUsuario, listarUsuarioTipo, lista_usuario_tipo, listarUsuario } =
+    useUsuarioStore();
   const { listarPerfilAcesso, lista_perfil_acesso } = usePerfilAcessoStore();
 
   const { lista_modulos, listarModulos } = useInquilino();
@@ -52,11 +62,11 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
 
   const [usuarioData, setUsuarioData] = useState<UsuarioType>({
     ...initialUsuarioState,
-      ...usuario,
-      inquilino_usuario: {
-        ...usuario.inquilino_usuario,
-        perfil_acesso: JSON.parse(String(usuario.inquilino_usuario?.perfil_acesso))
-      }
+    ...usuario,
+    inquilino_usuario: {
+      ...usuario.inquilino_usuario,
+      perfil_acesso: JSON.parse(String(usuario.inquilino_usuario?.perfil_acesso)),
+    },
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -90,14 +100,13 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
       ...usuario,
       inquilino_usuario: {
         ...usuario.inquilino_usuario,
-        perfil_acesso: JSON.parse(String(usuario.inquilino_usuario?.perfil_acesso))
-      }
+        perfil_acesso: JSON.parse(String(usuario.inquilino_usuario?.perfil_acesso)),
+      },
     });
   };
 
   const onClose = () => {
     setOpen(false);
-    
   };
 
   const handleSetPerfilAcesso = (id: string) => {
@@ -121,11 +130,14 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
   };
 
   const handleToggleModulo = (prefixo: PrefixoModulo) => {
-    if (Object(usuarioData?.inquilino_usuario?.perfil_acesso).hasOwnProperty(prefixo)) {
+    const temModuloHabilitado = Object.entries(usuarioData?.inquilino_usuario?.perfil_acesso ?? {})
+      .filter(([_, val]) => val !== undefined && val != null)
+      .some(([key]) => key === prefixo);
+    if (temModuloHabilitado) {
       setUsuarioData((prev) => {
         const perfilAcesso = usuarioData?.inquilino_usuario?.perfil_acesso;
 
-        delete perfilAcesso?.[prefixo]; // remove a chave do objeto
+        delete perfilAcesso?.[prefixo];
         return {
           ...prev,
           inquilino_usuario: {
@@ -135,26 +147,17 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
         };
       });
     } else {
-      const modulo = lista_modulos?.find((item) => item.prefixo == prefixo);
       setUsuarioData((prev) => ({
         ...prev,
         inquilino_usuario: {
           ...prev.inquilino_usuario,
           perfil_acesso: {
             ...prev.inquilino_usuario?.perfil_acesso,
-            [prefixo]: modulo?.permissao?.map((permissao) => ({
-              permissao_id: permissao.id,
-              nome: permissao.nome,
-              habilitado: false,
-            })),
+            [prefixo]: [],
           },
         },
       }));
     }
-
-    setUsuarioData((prev) => ({
-      ...prev,
-    }));
   };
 
   const handleTogglePermissao = ({
@@ -187,13 +190,18 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
   };
   return (
     <>
-      <IconButton onClick={onOpen}>
+      <IconButton color="info" onClick={onOpen}>
         <Edit />
       </IconButton>
-      <Dialog scroll='body' open={open} onClose={onClose}>
+      <Dialog scroll="body" maxWidth="md" open={open} onClose={onClose}>
         <Box component="form" onSubmit={handleSubmit}>
           <DialogTitle>Editar Usuário</DialogTitle>
-          <DialogContent dividers>
+          <DialogContent
+            dividers
+            sx={{
+              backgroundColor: 'background.default',
+            }}
+          >
             <Card>
               <CardHeader title="Dados Cadastrais" />
               <CardContent>
@@ -203,11 +211,37 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
                       xs: 12,
                       lg: 4,
                     }}
-                  > 
+                  >
+                    <FormControl fullWidth>
+                      <CustomFormLabel>Perfil de Acesso</CustomFormLabel>
+                      <CustomSelect
+                        id="perfil_acesso"
+                        name="perfil_acesso"
+                        fullWidth
+                        required
+                        value={usuarioData?.inquilino_usuario?.perfil_acesso?.id}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                          handleSetPerfilAcesso(e.target.value)
+                        }
+                      >
+                        {lista_perfil_acesso?.map((perfil, index) => (
+                          <MenuItem key={index} value={perfil.id}>
+                            {perfil.nome}
+                          </MenuItem>
+                        ))}
+                      </CustomSelect>
+                    </FormControl>
+                  </Grid>
+                  <Grid
+                    size={{
+                      xs: 12,
+                      lg: 8,
+                    }}
+                  >
+                    <CustomFormLabel>Nome Completo</CustomFormLabel>
                     <CustomTextField
                       id="name"
                       name="name"
-                      label="Nome Completo"
                       type="text"
                       fullWidth
                       required
@@ -218,13 +252,13 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
                   <Grid
                     size={{
                       xs: 12,
-                      lg: 8,
+                      lg: 6,
                     }}
                   >
+                    <CustomFormLabel>Email Corporativo</CustomFormLabel>
                     <CustomTextField
                       id="email"
                       name="email"
-                      label="Email Corporativo"
                       type="text"
                       fullWidth
                       required
@@ -238,24 +272,25 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
                       lg: 6,
                     }}
                   >
+                    <CustomFormLabel>Telefone / Celular</CustomFormLabel>
                     <CustomTextField
                       id="inquilino_usuario.telefone"
                       name="inquilino_usuario.telefone"
-                      label="Telefone / Celular "
                       type="text"
                       fullWidth
                       required
                       value={formatPhone(String(usuarioData.inquilino_usuario?.telefone))}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsuarioData(prev=> ({
-                        ...prev,
-                        inquilino_usuario: {
-                          ...prev.inquilino_usuario,
-                          telefone: apenasNumerosInteiros(e.target.value)
-                        }
-                      }))}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setUsuarioData((prev) => ({
+                          ...prev,
+                          inquilino_usuario: {
+                            ...prev.inquilino_usuario,
+                            telefone: apenasNumerosInteiros(e.target.value),
+                          },
+                        }))
+                      }
                     />
                   </Grid>
-              
 
                   <Grid
                     size={{
@@ -263,15 +298,20 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
                       lg: 6,
                     }}
                   >
+                    <CustomFormLabel>CPF</CustomFormLabel>
                     <CustomTextField
-                      id="email"
-                      name="email"
-                      label="CPF"
+                      id="documento"
+                      name="documento"
                       type="text"
                       fullWidth
                       required
-                      value={usuarioData.email}
-                      onChange={handleInputChange}
+                      value={cpfMask(String(usuarioData.documento))}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setUsuarioData((prev) => ({
+                          ...prev,
+                          documento: apenasNumerosInteiros(e.target.value),
+                        }))
+                      }
                     />
                   </Grid>
                   <Grid
@@ -280,21 +320,23 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
                       lg: 6,
                     }}
                   >
+                    <CustomFormLabel>Nº Matrícula</CustomFormLabel>
                     <CustomTextField
                       id="inquilino_usuario.matricula"
                       name="inquilino_usuario.matricula"
-                      label="Nº Matrícula"
                       type="text"
                       fullWidth
                       required
                       value={usuarioData.inquilino_usuario?.matricula}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsuarioData(prev=> ({
-                        ...prev,
-                        inquilino_usuario: {
-                          ...prev.inquilino_usuario,
-                          matricula: e.target.value
-                        }
-                      }))}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setUsuarioData((prev) => ({
+                          ...prev,
+                          inquilino_usuario: {
+                            ...prev.inquilino_usuario,
+                            matricula: e.target.value,
+                          },
+                        }))
+                      }
                     />
                   </Grid>
 
@@ -305,10 +347,10 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
                       lg: 6,
                     }}
                   >
+                    <CustomFormLabel>Senha</CustomFormLabel>
                     <CustomTextField
                       id="password"
                       name="password"
-                      label="Senha"
                       type="password"
                       fullWidth
                       value={usuarioData.password}
@@ -318,15 +360,14 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
                   <Grid
                     size={{
                       xs: 12,
-                      lg: 12,
+                      lg: 6,
                     }}
                   >
+                    <CustomFormLabel>Tipo de Usuário</CustomFormLabel>
                     <FormControl fullWidth>
-                      <InputLabel>Tipo de acesso</InputLabel>
                       <CustomSelect
                         id="usuario_tipo_id"
                         name="usuario_tipo_id"
-                        label="Tipo de acesso"
                         fullWidth
                         required
                         value={usuarioData.usuario_tipo_id}
@@ -340,34 +381,6 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
                       </CustomSelect>
                     </FormControl>
                   </Grid>
-                  <Grid
-                    size={{
-                      xs: 12,
-                      lg: 12,
-                    }}
-                  >
-                    <FormControl fullWidth>
-                      <InputLabel>Perfil</InputLabel>
-                      <CustomSelect
-                        id="perfil_acesso"
-                        name="perfil_acesso"
-                        label="Perfil"
-                        fullWidth
-                        required
-                        value={usuarioData?.inquilino_usuario?.perfil_acesso?.id}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                          handleSetPerfilAcesso(e.target.value)
-                        }
-                      >
-                        <MenuItem value={'nenhum'}>-- Selecione --</MenuItem>
-                        {lista_perfil_acesso?.map((perfil, index) => (
-                          <MenuItem key={index} value={perfil.id}>
-                            {perfil.nome}
-                          </MenuItem>
-                        ))}
-                      </CustomSelect>
-                    </FormControl>
-                  </Grid>
                 </Grid>
               </CardContent>
             </Card>
@@ -375,39 +388,149 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
               lista_modulos?.map((modulo) => {
                 const prefixo = modulo.prefixo as PrefixoModulo;
                 const permissoes = usuarioData?.inquilino_usuario?.perfil_acesso?.[prefixo];
+                const temModuloHabilitado = Object.entries(
+                  usuarioData?.inquilino_usuario?.perfil_acesso ?? {},
+                )
+                  .filter(([_, val]) => val !== undefined && val != null)
+                  .some(([key]) => key === prefixo);
 
                 return (
-                  <Card key={prefixo} sx={{ mt: 2 }}>
-                    <CardContent>
-                      <FormControlLabel
-                      control={
+                  <Card
+                    elevation={1}
+                    key={prefixo}
+                    sx={{
+                      mt: 2,
+                      border: temModuloHabilitado ? '2px solid' : '1px solid',
+                      borderColor: temModuloHabilitado ? '#93c5fd' : 'divider',
+                      transition: 'all 0.3s ease-in-out',
+                    }}
+                  >
+                    <CardHeader
+                      title={
+                        <Box sx={{ display: 'flex', gap: 2 }}>
+                          <Box
+                            sx={{
+                              borderRadius: 0.5,
+                              width: '35px',
+                              height: '35px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              color: temModuloHabilitado ? modulo.cor : '#9ca3af',
+                              backgroundColor: clareiaCorEmEx(
+                                temModuloHabilitado ? modulo.cor : '#9ca3af',
+                                30,
+                              ),
+                            }}
+                          >
+                            <DynamicTablerIcon icon={modulo.icone as TablerIconName} />
+                          </Box>
+                          <Box>
+                            <Typography sx={{ fontWeight: 900 }}>{modulo.nome}</Typography>
+                            <Typography
+                              variant="body2"
+                              color="text.disabled"
+                              sx={{ fontWeight: 900 }}
+                            >
+                              {temModuloHabilitado ? 'Módulo habilitado' : 'Acesso bloqueado'}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      }
+                      action={
                         <Switch
-                          checked={Object.entries(
-                            usuarioData?.inquilino_usuario?.perfil_acesso ?? {},
-                          ).some(([key]) => key === prefixo)}
+                          checked={temModuloHabilitado}
                           onChange={() => handleToggleModulo(prefixo)}
                         />
                       }
-                      label={modulo.nome}
                     />
+                    <Collapse
+                      {...(!temModuloHabilitado ? { timeout: 600 } : {})}
+                      in={temModuloHabilitado}
+                    >
+                      <Box
+                        sx={{
+                          borderTop: '1px solid',
+                          borderColor: 'divider',
+                          borderRadius: 0,
+                          p: 1,
+                          backgroundColor: 'background.default',
+                        }}
+                      >
+                        <Grow
+                          appear={true}
+                          in={temModuloHabilitado}
+                          {...(temModuloHabilitado ? { timeout: 600 } : {})}
+                        >
+                          <Box sx={{ mt: 1 }}>
+                            <Typography
+                              sx={(theme) => ({
+                                mb: 2,
+                                color: theme.palette.text.disabled,
+                                fontWeight: '900',
+                              })}
+                            >
+                              PERMISSÕES ESPECIFICAS
+                            </Typography>
+                            <Grid container spacing={2}>
+                              {modulo?.permissao?.map((p) => {
+                                const checked = permissoes?.some((item) => item === p.id);
+                                return (
+                                  <Grid size={{ xs: 6 }}>
+                                    <Card
+                                      sx={{
+                                        borderRadius: 0.5,
+                                        borderColor: checked ? 'info.main' : 'divider',
+                                        backgroundColor: checked
+                                          ? 'info.light'
+                                          : 'background.paper',
+                                      }}
+                                      variant="outlined"
+                                    >
+                                      <CardActionArea
+                                        onClick={() =>
+                                          handleTogglePermissao({
+                                            prefixo,
+                                            permissao_id: String(p.id),
+                                          })
+                                        }
+                                      >
+                                        <CardContent sx={{ p: 0.5, display: 'flex', gap: 2 }}>
+                                          <Checkbox checked={checked} />
+                                          <Stack>
+                                            <Typography
+                                              sx={{
+                                                mt: 1,
+                                                fontWeight: '900',
+                                                color: checked ? 'info.dark' : 'text.primary',
+                                              }}
+                                            >
+                                              {p.nome}
+                                            </Typography>
+                                            {p.permissao_critica == '1' && (
+                                              <Typography
+                                                sx={{
+                                                  fontWeight: '900',
+                                                  fontSize: '.5rem',
 
-                    <Box sx={{ ml: 4 }}>
-                      {modulo?.permissao?.map((p) => (
-                        <FormControlLabel
-                          key={p.id}
-                          control={
-                            <Checkbox
-                              checked={permissoes?.some((item) => item === p.id)}
-                              onChange={() =>
-                                handleTogglePermissao({ prefixo, permissao_id: String(p.id) })
-                              }
-                            />
-                          }
-                          label={p.nome}
-                        />
-                      ))}
-                    </Box>
-                    </CardContent>
+                                                  color: 'error.main',
+                                                }}
+                                              >
+                                                {String('crítico').toUpperCase()}
+                                              </Typography>
+                                            )}
+                                          </Stack>
+                                        </CardContent>
+                                      </CardActionArea>
+                                    </Card>
+                                  </Grid>
+                                );
+                              })}
+                            </Grid>
+                          </Box>
+                        </Grow>
+                      </Box>
+                    </Collapse>
                   </Card>
                 );
               })}

@@ -46,7 +46,7 @@ export const ModuloCard = ({ modulo }: ModuloCardType) => {
     }
   };
   return (
-    <Card>
+    <Card variant="outlined">
       <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         {Icon}
         <Typography variant="h6">{moduloNome}</Typography>

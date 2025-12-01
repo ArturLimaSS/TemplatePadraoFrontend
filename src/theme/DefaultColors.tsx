@@ -41,8 +41,10 @@ const baselightTheme = {
       A200: '#557fb9',
     },
     background: {
-      default: '#fff',
-      paper: '#F0F4F9',
+      default: '#F0F4F9',
+      // default: '#fff',
+      paper: '#fff',
+      paper_material: '#F0F4F9',
     },
     grey: {
       100: '#F2F6FA',
@@ -126,9 +128,11 @@ const baseDarkTheme = {
     },
     divider: '#333F55',
     background: {
-      default: '#282828',
+      default: '#333438',
+      // default: '#282828',
       dark: '#535353',
-      paper: '#333438',
+      paper: '#282828',
+      paper_material: '#333438',
     },
   },
 };

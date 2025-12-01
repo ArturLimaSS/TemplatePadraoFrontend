@@ -5,6 +5,7 @@ import PageContainer from 'src/components/container/PageContainer';
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
 import { Grid } from '@mui/material';
 import { DadosAcesso } from 'src/components/auth/dados-acesso';
+import { IconDatabase } from '@tabler/icons-react';
 
 const PerfilUsuario = () => {
   const BCrumb = [
@@ -27,6 +28,7 @@ const PerfilUsuario = () => {
             xs: 12,
           }}
         >
+          <IconDatabase />
           <DadosAcesso />
         </Grid>
       </Grid>

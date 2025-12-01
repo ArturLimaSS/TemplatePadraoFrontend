@@ -9,6 +9,7 @@ import {
   MenuItem,
   Alert,
   Card,
+  IconButton,
 } from '@mui/material';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -21,6 +22,7 @@ import type { UsuarioType } from 'src/types/usuario/usuario';
 import { useLoading } from 'src/context/LoadingContext/LoadingContext';
 import { swalErro, swalSucesso } from 'src/utils/swal';
 import { EditarUsuario } from './editar-usuario';
+import { Delete } from '@mui/icons-material';
 
 const ListaUsuarios = () => {
   const { lista_usuario, listarUsuario, excluirUsuario, isUsuarioLoading } = useUsuarioStore();
@@ -94,7 +96,7 @@ const ListaUsuarios = () => {
                 lg: 4,
               }}
             >
-              <Card elevation={0}>
+              <Card variant="outlined">
                 <CardContent>
                   <Box>
                     <Stack direction={'row'} gap={2} alignItems="center" justifyContent={'center'}>
@@ -112,6 +114,9 @@ const ListaUsuarios = () => {
                       </Box>
                       <Box ml="auto">
                         <EditarUsuario usuario={usuario} />
+                        <IconButton color='error' onClick={() => handleExcluirUsuario(usuario)}>
+                          <Delete />
+                        </IconButton>
                       </Box>
                     </Stack>
                   </Box>

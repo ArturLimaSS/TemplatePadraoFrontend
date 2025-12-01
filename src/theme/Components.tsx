@@ -312,8 +312,7 @@ const components: any = (theme: Theme) => {
         },
       },
     },
-    
-   
+
     MuiTableCell: {
       styleOverrides: {
         root: {
@@ -414,7 +413,6 @@ const components: any = (theme: Theme) => {
       },
     },
 
-  
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
@@ -423,7 +421,6 @@ const components: any = (theme: Theme) => {
         },
       },
     },
- 
 
     MuiPopover: {
       styleOverrides: {

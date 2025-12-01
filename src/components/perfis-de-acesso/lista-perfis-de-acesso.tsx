@@ -9,7 +9,7 @@ import {
   Stack,
   Divider,
 } from '@mui/material';
-import { Edit, Delete } from '@mui/icons-material';
+import { Delete } from '@mui/icons-material';
 import { useEffect } from 'react';
 import { useInquilino } from 'src/store/Inquilino/inquilino-store';
 import { usePerfilAcessoStore } from 'src/store/PerfilAcesso/perfil-acesso-store';
@@ -32,26 +32,31 @@ export const ListaPerfisDeAcesso = () => {
   };
 
   const modulosHabilitados = (perfil: any) => {
-    return Object.keys(perfil).filter((key) => lista_modulos?.some((m) => m.prefixo === key));
+    return Object.keys(perfil).filter(
+      (key) =>
+        perfil[key] !== undefined &&
+        perfil[key] != null &&
+        lista_modulos?.some((m) => m.prefixo === key),
+    );
   };
 
-  const {dialogConfirmacao} = useAlert();
+  const { dialogConfirmacao } = useAlert();
 
   const handleExcluirPerfilDeAcesso = async (perfil: PerfilAcessoType) => {
     const confirmacao = await dialogConfirmacao({
-      title: "Deseja realmente excluir este perfil?", content: "Esta ação não poderá ser revertida!"
-    })
+      title: 'Deseja realmente excluir este perfil?',
+      content: 'Esta ação não poderá ser revertida!',
+    });
 
-    if(!confirmacao) return
+    if (!confirmacao) return;
     const response = await excluirPerfilAcesso(perfil);
-    if(response.status == 200){
-      swalSucesso("Perfil excluido com sucesso!")
+    if (response.status == 200) {
+      swalSucesso('Perfil excluido com sucesso!');
       listarPerfilAcesso();
+    } else {
+      swalErro('ocorreu um erro ao tentar excluir o perfil de acesso!');
     }
-    else{
-      swalErro("ocorreu um erro ao tentar excluir o perfil de acesso!")
-    }
-  }
+  };
 
   return (
     <Grid container spacing={3}>
@@ -82,7 +87,7 @@ export const ListaPerfisDeAcesso = () => {
                   </Typography>
 
                   <Box>
-                   <AtualizarPerfilDeAcesso perfil_acesso={perfil} />
+                    <AtualizarPerfilDeAcesso perfil_acesso={perfil} />
                     <IconButton onClick={() => handleExcluirPerfilDeAcesso(perfil)} color="error">
                       <Delete />
                     </IconButton>

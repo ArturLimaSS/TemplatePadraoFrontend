@@ -15,8 +15,6 @@ export function apenasNumerosInteiros(value: string) {
   return numeros;
 }
 
-
-
 const documentoMask = (value: string) => {
   let newValue = value;
 
@@ -167,6 +165,10 @@ function formataMoeda(value: number | string, currency: string) {
   return `${numeroFormatado} ${currency == 'XAU' ? '(g)' : ''}`;
 }
 
+export const clareiaCorEmEx = (cor: string, quantidade: number | string) => {
+  return `${cor}${quantidade}`;
+};
+
 const mascaraMetalPeso = function (value: string | number) {
   return new Intl.NumberFormat('pt-BR', {
     style: 'decimal',
@@ -221,7 +223,6 @@ const formatarDeMascaraMoeda = function (strValue: string) {
   return null;
 };
 
-
 const formatarDeMascaraController = function (strValue: string) {
   if (strValue || false) {
     let nvValor = strValue.replace(/\D/g, '');
@@ -232,8 +233,6 @@ const formatarDeMascaraController = function (strValue: string) {
 
   return null;
 };
-
-
 
 const validaCPF = function (strCPF: string) {
   if (strCPF) {
@@ -277,11 +276,6 @@ export const formatPhone = (value: string) => {
     .replace(/(\d{5})(\d)/, '$1-$2')
     .replace(/(-\d{4})\d+?$/, '$1');
 };
-
-
-
-
-
 
 function validaEmail(email: string) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
