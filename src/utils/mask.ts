@@ -147,6 +147,12 @@ function identidadeMask(value: string) {
     .replace(/(-\d{1})\d+?$/, '$1');
 }
 
+export function primeirasLetrasNome(texto: string) {
+  const words = texto.trim().split(' ').filter(Boolean).slice(0, 2);
+
+  return words.map((word) => word[0].toUpperCase()).join('');
+}
+
 function formataMoeda(value: number | string, currency: string) {
   if (!value) return '';
 

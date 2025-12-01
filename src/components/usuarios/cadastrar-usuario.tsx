@@ -178,7 +178,7 @@ export const CadastrarUsuario = () => {
   return (
     <>
       <Button variant={'contained'} onClick={onOpen} startIcon={<IconPlus />}>
-        Cadastrar
+        Novo Usuário
       </Button>
       <Dialog
         open={open}

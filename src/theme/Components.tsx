@@ -224,6 +224,7 @@ const components: any = (theme: Theme) => {
       styleOverrides: {
         root: {
           textTransform: 'none',
+          fontWeight: 'bold',
         },
         text: {
           padding: '5px 15px',

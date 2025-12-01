@@ -46,6 +46,11 @@ const baselightTheme = {
       paper: '#fff',
       paper_material: '#F0F4F9',
     },
+    dark: {
+      main: '#7C8FAC',
+      light: '#DFE5EF',
+      dark: '#333F55',
+    },
     grey: {
       100: '#F2F6FA',
       200: '#EAEFF4',
@@ -108,6 +113,11 @@ const baseDarkTheme = {
       A50: '#EBF3FE',
       A100: '#6610f2',
       A200: '#557fb9',
+    },
+    dark: {
+      main: '#7C8FAC',
+      light: '#333F55',
+      dark: '#DFE5EF',
     },
     grey: {
       100: '#333F55',

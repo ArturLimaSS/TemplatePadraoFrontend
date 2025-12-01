@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import React from 'react';
-import { Grid } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import PageContainer from 'src/components/container/PageContainer';
 
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
@@ -11,19 +11,24 @@ import { CadastrarUsuario } from 'src/components/usuarios/cadastrar-usuario';
 const Usuarios = () => {
   const BCrumb = [
     {
-      to: '/',
-      title: 'Painel',
-    },
-    {
-      title: 'Usuários',
+      title: 'Gestão de Usuários',
     },
   ];
   return (
     <>
-      <PageContainer title="Usuários" description="Página para gestão de acessos">
-        <Breadcrumb title="Usuários" items={BCrumb} action={<CadastrarUsuario />} />
-
+      <PageContainer title="Gestão de Usuários" description="Página para gestão de acessos">
         <Grid container spacing={3}>
+          <Grid size={12}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Box>
+                <Typography sx={{ fontSize: '1.5rem', fontWeight: 900 }}>
+                  Gestão de Usuários
+                </Typography>
+                <Typography>Controle de acesso granular e perfis</Typography>
+              </Box>
+              <CadastrarUsuario />
+            </Box>
+          </Grid>
           <Grid
             size={{
               sm: 12,
