@@ -1,4 +1,4 @@
-import { Add } from '@mui/icons-material';
+import { Add, CheckBox, CheckBoxOutlineBlank } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -6,14 +6,12 @@ import {
   CardActionArea,
   CardContent,
   CardHeader,
-  Checkbox,
   Collapse,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   FormControl,
-  FormControlLabel,
   Grid,
   Grow,
   Stack,
@@ -84,18 +82,13 @@ export const CadastrarPerfilDeAcesso = () => {
     if (temModuloHabilitado) {
       setPerfilAcessoData((prev) => {
         const novo = { ...prev };
-        delete novo[prefixo]; // remove a chave do objeto
+        delete novo[prefixo];
         return novo;
       });
     } else {
-      const modulo = lista_modulos?.find((item) => item.prefixo == prefixo);
       setPerfilAcessoData((prev) => ({
         ...prev,
-        [prefixo]: modulo?.permissao?.map((permissao) => ({
-          permissao_id: permissao.id,
-          nome: permissao.nome,
-          habilitado: false,
-        })),
+        [prefixo]: [],
       }));
     }
 
@@ -113,13 +106,13 @@ export const CadastrarPerfilDeAcesso = () => {
   }) => {
     const modulo = perfilAcessoData[prefixo] as string[] | undefined;
 
-    if (!modulo) return; // módulo não habilitado
+    if (!modulo) return;
 
     const checado = modulo.includes(permissao_id);
 
     const novoArray = checado
-      ? modulo.filter((id) => id !== permissao_id) // remove
-      : [...modulo, permissao_id]; // adiciona
+      ? modulo.filter((id) => id !== permissao_id)
+      : [...modulo, permissao_id];
 
     setPerfilAcessoData((prev) => ({
       ...prev,
@@ -258,7 +251,13 @@ export const CadastrarPerfilDeAcesso = () => {
                                       }
                                     >
                                       <CardContent sx={{ p: 0.5, display: 'flex', gap: 2 }}>
-                                        <Checkbox checked={checked} />
+                                        <Box sx={{ p: 0.5 }}>
+                                          {checked ? (
+                                            <CheckBox sx={{ color: 'info.dark' }} />
+                                          ) : (
+                                            <CheckBoxOutlineBlank sx={{ color: 'text.disabled' }} />
+                                          )}
+                                        </Box>
                                         <Stack>
                                           <Typography
                                             sx={{

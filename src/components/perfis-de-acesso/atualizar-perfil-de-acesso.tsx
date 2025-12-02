@@ -1,4 +1,4 @@
-import { Add, Edit } from '@mui/icons-material';
+import { Add, CheckBox, CheckBoxOutlineBlank, Edit } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -6,14 +6,12 @@ import {
   CardActionArea,
   CardContent,
   CardHeader,
-  Checkbox,
   Collapse,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   FormControl,
-  FormControlLabel,
   Grid,
   Grow,
   IconButton,
@@ -21,7 +19,7 @@ import {
   Switch,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useInquilino } from 'src/store/Inquilino/inquilino-store';
 import { usePerfilAcessoStore } from 'src/store/PerfilAcesso/perfil-acesso-store';
 import type { PerfilAcessoType, PrefixoModulo } from 'src/store/PerfilAcesso/perfil-acesso-types';
@@ -48,17 +46,6 @@ export const AtualizarPerfilDeAcesso = ({ perfil_acesso }: AtualizarPerfilAcesso
     setPerfilAcessoData(perfil_acesso);
   };
 
-  // useEffect(() => {
-  //   lista_modulos?.map((modulo) => {
-  //     const prefixo = modulo.prefixo as keyof PerfilAcessoType;
-
-  //     setPerfilAcessoData((prev) => ({
-  //       ...prev,
-  //       [prefixo]: [],
-  //     }));
-  //   });
-  // }, [lista_modulos]);
-
   const onClose = () => {
     setOpen(false);
     setPerfilAcessoData(perfil_acesso);
@@ -83,18 +70,13 @@ export const AtualizarPerfilDeAcesso = ({ perfil_acesso }: AtualizarPerfilAcesso
     if (temModuloHabilitado) {
       setPerfilAcessoData((prev) => {
         const novo = { ...prev };
-        delete novo[prefixo]; // remove a chave do objeto
+        delete novo[prefixo];
         return novo;
       });
     } else {
-      const modulo = lista_modulos?.find((item) => item.prefixo == prefixo);
       setPerfilAcessoData((prev) => ({
         ...prev,
-        [prefixo]: modulo?.permissao?.map((permissao) => ({
-          permissao_id: permissao.id,
-          nome: permissao.nome,
-          habilitado: false,
-        })),
+        [prefixo]: [],
       }));
     }
 
@@ -112,13 +94,13 @@ export const AtualizarPerfilDeAcesso = ({ perfil_acesso }: AtualizarPerfilAcesso
   }) => {
     const modulo = perfilAcessoData[prefixo] as string[] | undefined;
 
-    if (!modulo) return; // módulo não habilitado
+    if (!modulo) return;
 
     const checado = modulo.includes(permissao_id);
 
     const novoArray = checado
-      ? modulo.filter((id) => id !== permissao_id) // remove
-      : [...modulo, permissao_id]; // adiciona
+      ? modulo.filter((id) => id !== permissao_id)
+      : [...modulo, permissao_id];
 
     setPerfilAcessoData((prev) => ({
       ...prev,
@@ -257,7 +239,13 @@ export const AtualizarPerfilDeAcesso = ({ perfil_acesso }: AtualizarPerfilAcesso
                                       }
                                     >
                                       <CardContent sx={{ p: 0.5, display: 'flex', gap: 2 }}>
-                                        <Checkbox checked={checked} />
+                                        <Box sx={{ p: 0.5 }}>
+                                          {checked ? (
+                                            <CheckBox sx={{ color: 'info.dark' }} />
+                                          ) : (
+                                            <CheckBoxOutlineBlank sx={{ color: 'text.disabled' }} />
+                                          )}
+                                        </Box>
                                         <Stack>
                                           <Typography
                                             sx={{
