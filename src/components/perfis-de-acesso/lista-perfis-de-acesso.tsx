@@ -69,7 +69,6 @@ export const ListaPerfisDeAcesso = () => {
             size={{
               xs: 12,
               md: 6,
-              lg: 3,
             }}
           >
             <Card>
