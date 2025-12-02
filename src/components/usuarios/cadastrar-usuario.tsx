@@ -1,4 +1,4 @@
-import { Close, Save } from '@mui/icons-material';
+import { CheckBox, CheckBoxOutlineBlank, Close, Save } from '@mui/icons-material';
 import {
   Button,
   Card,
@@ -536,7 +536,15 @@ export const CadastrarUsuario = () => {
                                         }
                                       >
                                         <CardContent sx={{ p: 0.5, display: 'flex', gap: 2 }}>
-                                          <Checkbox checked={checked} />
+                                          <Box sx={{ p: 0.5 }}>
+                                            {checked ? (
+                                              <CheckBox sx={{ color: 'info.dark' }} />
+                                            ) : (
+                                              <CheckBoxOutlineBlank
+                                                sx={{ color: 'text.disabled' }}
+                                              />
+                                            )}
+                                          </Box>
                                           <Stack>
                                             <Typography
                                               sx={{

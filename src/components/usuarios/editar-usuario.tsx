@@ -1,4 +1,4 @@
-import { Close, Edit, Save } from '@mui/icons-material';
+import { AddBox, CheckBox, CheckBoxOutlineBlank, Close, Edit, Save } from '@mui/icons-material';
 import {
   Button,
   Card,
@@ -38,7 +38,7 @@ import type { PrefixoModulo } from 'src/store/PerfilAcesso/perfil-acesso-types';
 import { apenasNumerosInteiros, clareiaCorEmEx, cpfMask, formatPhone } from 'src/utils/mask';
 import CustomFormLabel from '../forms/theme-elements/CustomFormLabel';
 import { DynamicTablerIcon, type TablerIconName } from '../ui/dynamic-tabler-icon';
-import { IconLock, IconUserCircle } from '@tabler/icons-react';
+import { IconCheckbox, IconLock, IconUserCircle } from '@tabler/icons-react';
 
 const initialUsuarioState: UsuarioType = {
   id: null,
@@ -428,7 +428,7 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
                 label={
                   Object.entries(usuarioData?.inquilino_usuario?.perfil_acesso ?? {})
                     ?.filter(([key, _]) => lista_modulos?.map((m) => m.prefixo).includes(key))
-                    .flatMap(([_, value]) => (value ? value : [])).length  + ' permissões'
+                    .flatMap(([_, value]) => (value ? value : [])).length + ' permissões'
                 }
                 size="small"
               />
@@ -545,7 +545,15 @@ export const EditarUsuario = ({ usuario }: EditarUsuarioProps) => {
                                         }
                                       >
                                         <CardContent sx={{ p: 0.5, display: 'flex', gap: 2 }}>
-                                          <Checkbox checked={checked} />
+                                          <Box sx={{ p: 0.5 }}>
+                                            {checked ? (
+                                              <CheckBox sx={{ color: 'info.dark' }} />
+                                            ) : (
+                                              <CheckBoxOutlineBlank
+                                                sx={{ color: 'text.disabled' }}
+                                              />
+                                            )}
+                                          </Box>
                                           <Stack>
                                             <Typography
                                               sx={{
