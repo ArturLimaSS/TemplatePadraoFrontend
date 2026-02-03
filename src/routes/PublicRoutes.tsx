@@ -19,7 +19,7 @@ const routes: RouteType[] = [
       { path: '/', element: <Navigate to={'/auth/login'} /> },
       { path: '*', element: <Navigate to={'/auth/login'} /> },
       { path: '/auth/404', element: <Error /> },
-      { path: '/auth/login', element: <Login /> },
+      { path: '/auth/login', element: <Login2 /> },
       { path: '/auth/login2', element: <Login2 /> },
       { path: '/auth/register', element: <Register /> },
       { path: '/auth/forgot-password', element: <ForgotPassword /> },

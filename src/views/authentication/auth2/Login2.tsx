@@ -27,7 +27,13 @@ const Login2 = () => {
           },
         }}
       >
-        <Grid container spacing={0} justifyContent="center" sx={{ height: '100vh' }}>
+        <Grid
+          container
+          spacing={0}
+          justifyContent="center"
+          alignItems="center"
+          sx={{ height: '100vh' }}
+        >
           <Grid
             display="flex"
             justifyContent="center"
@@ -39,30 +45,11 @@ const Login2 = () => {
               xl: 4,
             }}
           >
-            <Card elevation={9} sx={{ p: 4, zIndex: 1, width: '100%', maxWidth: '450px' }}>
+            <Card sx={{ p: 4, zIndex: 1, width: '100%', maxWidth: '550px' }}>
               <Box display="flex" alignItems="center" justifyContent="center">
                 <Logo />
               </Box>
-              <AuthLogin
-                subtitle={
-                  <Stack direction="row" spacing={1} justifyContent="center" mt={3}>
-                    <Typography color="textSecondary" variant="h6" fontWeight="500">
-                      New to OrCloud?
-                    </Typography>
-                    <Typography
-                      component={Link}
-                      to="/auth/register"
-                      fontWeight="500"
-                      sx={{
-                        textDecoration: 'none',
-                        color: 'primary.main',
-                      }}
-                    >
-                      Create an account
-                    </Typography>
-                  </Stack>
-                }
-              />
+              <AuthLogin />
             </Card>
           </Grid>
         </Grid>

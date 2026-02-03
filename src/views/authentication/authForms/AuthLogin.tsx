@@ -1,7 +1,19 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import React, { useState } from 'react';
-import { Box, Typography, FormGroup, FormControlLabel, Button, Stack } from '@mui/material';
+import {
+  Box,
+  Typography,
+  FormGroup,
+  FormControlLabel,
+  Button,
+  Stack,
+  InputAdornment,
+  IconButton,
+  Alert,
+  Collapse,
+} from '@mui/material';
+import { IconEye, IconEyeOff } from '@tabler/icons-react';
 import { Link } from 'react-router';
 
 import { loginType, type loginFormType } from 'src/types/auth/auth';
@@ -10,23 +22,39 @@ import CustomTextField from '../../../components/forms/theme-elements/CustomText
 import CustomFormLabel from '../../../components/forms/theme-elements/CustomFormLabel';
 
 import { useAuthStore } from 'src/store/Auth/auth-store';
-import { swalErro, swalSucesso } from 'src/utils/swal';
+import { swalErro, swalSucesso, toastSucesso } from 'src/utils/swal';
+import { useLoading } from 'src/context/LoadingContext/LoadingContext';
 
-const AuthLogin = ({ title, subtitle }: loginType) => {
+const AuthLogin = () => {
   const { login, initializeAuth } = useAuthStore();
+  const [showPassword, setShowPassword] = useState(false);
+  const [capsLock, setCapsLock] = useState(false);
+
+  const { setLoading } = useLoading();
 
   const [authData, setAuthData] = useState<loginFormType>({
     email: '',
     password: '',
   });
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    const isCapsLockOn = e.getModifierState('CapsLock');
+    setCapsLock(isCapsLockOn);
+
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   const handleSubmit = async () => {
+    setLoading(true);
     const response = await login(authData);
     if (response?.status == 200) {
-      swalSucesso('Login realizado com sucesso!');
+      toastSucesso('Login realizado com sucesso!');
     } else {
       swalErro('Credenciais inválidas');
     }
+    setLoading(false);
   };
   return (
     <>
@@ -40,6 +68,9 @@ const AuthLogin = ({ title, subtitle }: loginType) => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setAuthData((prev) => ({ ...prev, email: e.target.value }))
             }
+            onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key === 'Enter') handleSubmit();
+            }}
             id="email"
             variant="outlined"
             fullWidth
@@ -56,9 +87,30 @@ const AuthLogin = ({ title, subtitle }: loginType) => {
               }))
             }
             id="password"
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             variant="outlined"
             fullWidth
+            onKeyUp={handleKeyDown}
+            helperText={
+              capsLock && (
+                <Typography color="error" sx={{ mt: 0.5, display: 'block', fontWeight: 'bold' }}>
+                  Caps Lock Ativado
+                </Typography>
+              )
+            }
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                    edge="end"
+                  >
+                    {showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
         </Box>
         <Stack justifyContent="space-between" direction="row" alignItems="center" my={2}>
@@ -86,7 +138,8 @@ const AuthLogin = ({ title, subtitle }: loginType) => {
           Entrar
         </Button>
       </Box>
-      {subtitle}
+
+      {/* {subtitle} */}
     </>
   );
 };
