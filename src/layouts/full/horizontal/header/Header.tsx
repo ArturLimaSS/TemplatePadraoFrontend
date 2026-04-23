@@ -10,6 +10,7 @@ import {
   styled,
   Stack,
   Theme,
+  Chip,
 } from '@mui/material';
 
 import { IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
@@ -18,6 +19,7 @@ import Logo from 'src/layouts/full/shared/logo/Logo';
 import config from 'src/context/config';
 import { CustomizerContext } from 'src/context/CustomizerContext';
 import { DropDownPefil } from 'src/components/auth/dropdown-perfil';
+import { useAuthStore } from 'src/store/Auth/auth-store';
 
 const Header = () => {
   const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
@@ -44,6 +46,8 @@ const Header = () => {
       minHeight: TopbarHeight,
     },
   }));
+
+  const { inquilino } = useAuthStore();
   const ToolbarStyled = styled(Toolbar)(({ theme }) => ({
     margin: '0 auto',
     width: '100%',
@@ -89,6 +93,7 @@ const Header = () => {
             </>
           ) : null} */}
           <Box flexGrow={1} />
+          <Chip label={inquilino?.nome} />
           <Stack spacing={1} direction="row" alignItems="center">
             <IconButton size="large" color="inherit">
               {activeMode === 'light' ? (
