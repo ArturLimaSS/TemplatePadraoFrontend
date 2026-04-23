@@ -93,7 +93,13 @@ const Header = () => {
             </>
           ) : null} */}
           <Box flexGrow={1} />
-          <Chip label={inquilino?.nome} />
+          <Chip
+            label={String(inquilino?.nome)
+              .toUpperCase()
+              .replace('LTDA', '')
+              .replace('ME', '')
+              .replace('SA', '')}
+          />
           <Stack spacing={1} direction="row" alignItems="center">
             <IconButton size="large" color="inherit">
               {activeMode === 'light' ? (
