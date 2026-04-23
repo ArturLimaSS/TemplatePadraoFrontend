@@ -22,6 +22,7 @@ interface AuthState {
   isAuthenticated: boolean;
   isTenantSelected: boolean;
   isAuthLoading: boolean;
+  tenant_user_session_id: string | null;
   lista_inquilinos_usuario: InquilinoUsuario[],
   usuario_modulos: UsuarioModuloType[];
   perfil_acesso?: PerfilAcessoType;
@@ -43,9 +44,10 @@ interface AuthState {
   logout: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
   isAuthenticated: !!localStorage.getItem('token'),
   isTenantSelected: !!localStorage.getItem('tenant_user_session_id'),
+  tenant_user_session_id: localStorage.getItem('tenant_user_session_id'),
   isAuthLoading: false,
   lista_inquilinos_usuario: [],
   usuario_modulos: [],
@@ -102,7 +104,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       set({
         isAuthenticated: true, isAuthLoading: false, usuario_modulos: response.data.usuario_modulos,
         inquilino: response.data.inquilino,
-        perfil_acesso: typeof perfilAcessoResponse == "string" ? JSON.parse(perfilAcessoResponse) : perfilAcessoResponse, 
+        perfil_acesso: typeof perfilAcessoResponse == "string" ? JSON.parse(perfilAcessoResponse) : perfilAcessoResponse,
         usuario_tipo_id: response.data.inquilinoUsuario.usuario_tipo_id,
         usuario_logado: response.data.user,
         usuario_tipo: response.data.inquilinoUsuario.usuario_tipo
@@ -123,7 +125,9 @@ export const useAuthStore = create<AuthState>((set) => ({
 
     try {
 
-      const response = await api.post("/v1/auth/logout")
+      const response = await api.post("/v1/auth/logout", {
+        tenant_user_session_id: get().tenant_user_session_id,
+      })
 
       localStorage.removeItem('token');
       localStorage.removeItem('user');

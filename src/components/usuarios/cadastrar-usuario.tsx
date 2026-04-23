@@ -57,6 +57,7 @@ export const CadastrarUsuario = () => {
     setOpen(true);
     listarPerfilAcesso();
     listarModulos();
+    listarUsuarioTipo();
     setUsuarioData((prev) => ({
       ...prev,
       inquilino_usuario: {
